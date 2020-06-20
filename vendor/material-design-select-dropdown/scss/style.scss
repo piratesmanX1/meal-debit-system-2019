@@ -1,0 +1,148 @@
+html,
+body{
+	align-items: center;
+	background:#E8E8E8;
+	box-sizing:border-box;
+	color: #666;
+	cursor: default;
+	display: flex;
+	font-family: sans-serif;
+	height:100%;
+	justify-content: center;
+	margin:0;
+	width:100%;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+*{
+	box-sizing:inherit;
+	cursor: inherit;
+	transition-duration:.2s;
+	transition-property:none;
+	transition-timing-function:cubic-bezier(.42,0,.58,1)
+}
+label.field {
+	border-radius: 2px;
+	color: #666;
+	display: block;
+	margin: 16px;
+	max-width: 300px;
+	padding: 8px;
+	opacity: 0;
+	position: relative;
+	transition-property: opacity;
+	z-index: 1;
+	span {
+		color: inherit;
+		display: block;
+		font-size: 16px;
+		height: 20px;
+		line-height: 20px;
+		left: 9px;
+		pointer-events: none;
+		position: absolute;
+		top: 32px;
+		transform: scale(1) translateY(0);
+		transition-property: color, font-size, top;
+		z-index: 1;
+		&.required {
+			&::after {
+				color: inherit;
+				content: "*";
+				display: block;
+				height: 20px;
+				left: -20px;
+				line-height: 20px;
+				position: absolute;
+				text-align: center;
+				top: 0;
+				width: 20px;
+			}
+		}
+		.error & {
+			color: #F02318
+		}
+	}
+	.psuedo_select {
+		background: rgba(255,255,255,0);
+		position: relative;
+		border-color: #666;
+		border-style: solid;
+		border-width: 0 0 2px 0;
+		color: #666;
+		cursor: pointer;
+		font-size: 20px;
+		height: 24px;
+		line-height: 24px;
+		margin: 24px 32px 0 0;
+		min-width: 250px;
+		padding-top: 24px;
+		outline: 0;
+		z-index: 1;
+		&::after {
+			background: url("data:image/svg+xml;utf8,<svg fill='#666' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'> <path d='M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z'/> <path d='M0-.75h24v24H0z' fill='none'/> </svg>"), no-repeat;
+			content: "";
+			height: 24px;
+			width: 24px;
+			position: absolute;
+			top: 0;
+			right: 0;
+			transition-property: background;
+		}
+		.selected {
+			height: 24px;
+			left: 1px;
+			line-height: 24px;
+			opacity: 0;
+			position: absolute;
+			top: 0;
+			transform: translateY(24px);
+			transition-property: opacity, transform;
+			will-change: transform;
+		}
+		ul {
+			background: #fff;
+			box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+			display: block;
+			height: 0;
+			list-style: none;
+			margin-top: 2px;
+			opacity: 0;
+			overflow: hidden;
+			padding: 0 1px;
+			pointer-events: none;
+			transition-property: height, opacity;
+			width: 100%;
+			z-index: 2;
+			li {
+				height: 32px;
+				padding: 8px 4px;
+			}
+		}
+	}
+	.deselect {
+		height: 100vh;
+		left: 0;
+		position: fixed;
+		top: 0;
+		width: 100vw;
+		z-index: -1;
+	}
+	&.focused {
+		color: #007BED;
+		.psuedo_select {
+			border-color: #007BED;
+			&::after {
+				background: url("data:image/svg+xml;utf8,<svg fill='#007BED' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'> <path d='M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z'/> <path d='M0-.75h24v24H0z' fill='none'/> </svg>"), no-repeat;
+			}
+			ul {
+				opacity: 1;
+				pointer-events: all;
+			}
+		}
+	}
+}

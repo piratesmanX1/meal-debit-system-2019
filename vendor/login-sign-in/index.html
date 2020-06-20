@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login/Sign-In</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+<div class="logmod">
+  <div class="logmod__wrapper">
+    <span class="logmod__close">Close</span>
+    <div class="logmod__container">
+      <ul class="logmod__tabs">
+        <li data-tabtar="lgm-2"><a href="" onclick="return false">Approve</a></li>
+        <li data-tabtar="lgm-1"><a href="" onclick="return false">Delete</a></li>
+      </ul>
+      <div class="logmod__tab-wrapper">
+      <div class="logmod__tab lgm-1">
+        <div class="logmod__heading">
+          <span class="logmod__heading-subtitle">Enter your information to verify and <strong>delete the record.</strong></span>
+        </div>
+        <div class="logmod__form">
+          <form accept-charset="utf-8" method="post" action="" class="simform">
+            <div class="sminputs">
+              <div class="input full">
+                <label class="string optional" for="user-name">Access Code*</label>
+                <input required class="string optional" maxlength="255" id="user-email" placeholder="Email" type="email" size="50" />
+              </div>
+            </div>
+            <div class="sminputs">
+              <div class="input string optional">
+                <label class="string optional" for="user-pw">Password *</label>
+                <input required class="string optional first-pw" maxlength="255" id="user-pw-approve" placeholder="Password" type="password" size="50" />
+              </div>
+              <div class="input string optional">
+                <label class="string optional" for="user-pw-repeat">Repeat password *</label>
+                <input required class="string optional" maxlength="255" id="user-pw-repeat" placeholder="Repeat password" type="password" size="50" />
+              	<span class="hide-password" id="toggle-pw-approve" onclick="togglePasswordFieldClickedApprove()">Show</span>
+              </div>
+            </div>
+            <div class="simform__actions">
+              <input required class="sumbit" name="submit" type="submit" value="Confirm Deletion" />
+              <span class="simform__actions-sidetext">By deleting the records, you are here and agree our <a class="special" onclick="return false;" role="link">Terms & Conditions</a></span>
+            </div> 
+          </form>
+        </div> 
+       </div>
+      <div class="logmod__tab lgm-2">
+        <div class="logmod__heading">
+          <span class="logmod__heading-subtitle">Enter your information to verify and <strong>approve the registration.</strong></span>
+        </div> 
+        <div class="logmod__form">
+          <form accept-charset="utf-8" method="post" action="" class="simform">
+            <div class="sminputs">
+              <div class="input full">
+                <label class="string optional" for="user-name">Access Code*</label>
+                <input required class="string optional" maxlength="255" id="user-email" placeholder="Email" type="email" size="50" />
+              </div>
+            </div>
+            <div class="sminputs">
+              <div class="input string optional">
+                <label class="string optional" for="user-pw">Password *</label>
+                <input required class="string optional first-pw" maxlength="255" id="user-pw-delete" placeholder="Password" type="password" size="50" />
+              </div>
+              <div class="input string optional">
+                <label class="string optional" for="user-pw-repeat">Repeat password *</label>
+                <input required class="string optional" maxlength="255" id="user-pw-repeat" placeholder="Repeat password" type="password" size="50" />
+              	<span class="hide-password" id="toggle-pw-delete" onclick="togglePasswordFieldClickedDelete()">Show</span>
+              </div>
+            </div>
+            <div class="simform__actions">
+              <input required class="sumbit" name="submit" type="submit" value="Confirm Registration" />
+              <span class="simform__actions-sidetext">By approving the registrations, you agree here to our <a class="special" onclick="return false;" role="link">Terms & Conditions</a></span>
+            </div> 
+          </form>
+        </div> 
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<!-- Toggle to show password or not -->
+<script type="text/javascript">
+(function() {
+
+	try {
+
+		// switch the password field to text, then back to password to see if it supports
+		// changing the field type (IE9+, and all other browsers do). then switch it back.
+		var passwordField = document.getElementById('user-pw-approve');
+		passwordField.type = 'text';
+		passwordField.type = 'password';
+		
+		// if it does support changing the field type then add the event handler and make
+		// the button visible. if the browser doesn't support it, then this is bypassed
+		// and code execution continues in the catch() section below
+		var togglePasswordField = document.getElementById('toggle-pw-approve');
+		togglePasswordField.addEventListener('click', togglePasswordFieldClicked, false);
+		togglePasswordField.style.display = 'inline';
+		
+	}
+	catch(err) {
+
+	}
+
+})();
+
+function togglePasswordFieldClickedApprove() {
+
+	var passwordField = document.getElementById('user-pw-approve');
+	var value = passwordField.value;
+
+	if(passwordField.type == 'password') {
+		passwordField.type = 'text';
+	}
+	else {
+		passwordField.type = 'password';
+	}
+	
+	passwordField.value = value;
+
+} 
+</script>
+<script type="text/javascript">
+(function() {
+
+	try {
+
+		// switch the password field to text, then back to password to see if it supports
+		// changing the field type (IE9+, and all other browsers do). then switch it back.
+		var passwordField = document.getElementById('user-pw-delete');
+		passwordField.type = 'text';
+		passwordField.type = 'password';
+		
+		// if it does support changing the field type then add the event handler and make
+		// the button visible. if the browser doesn't support it, then this is bypassed
+		// and code execution continues in the catch() section below
+		var togglePasswordField = document.getElementById('toggle-pw-delete');
+		togglePasswordField.addEventListener('click', togglePasswordFieldClicked, false);
+		togglePasswordField.style.display = 'inline';
+		
+	}
+	catch(err) {
+
+	}
+
+})();
+
+function togglePasswordFieldClickedDelete() {
+
+	var passwordField = document.getElementById('user-pw-delete');
+	var value = passwordField.value;
+
+	if(passwordField.type == 'password') {
+		passwordField.type = 'text';
+	}
+	else {
+		passwordField.type = 'password';
+	}
+	
+	passwordField.value = value;
+
+} 
+</script>
+ 
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css?family=Barrio|Montserrat:700");
+body {
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: #111;
+}
+
+button {
+  margin: auto;
+  padding: 1rem;
+  text-transform: uppercase;
+  color: #fafafa;
+  background-color: #00d166;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 1px 1px 10px rgba(50, 50, 50, 0.4);
+  transition: .3s all ease;
+  letter-spacing: .1rem;
+  font-size: .85rem;
+  position: relative;
+  top: 0;
+  right: 0;
+  padding-left: 2.5rem;
+}
+button:after, button:before {
+  position: absolute;
+  font-family: 'Barrio', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #006b34;
+  transition: .3s all ease;
+}
+button:before {
+  content: '_';
+  position: absolute;
+  left: 1.4rem;
+  top: .9rem;
+}
+button:after {
+  content: '>';
+  position: absolute;
+  left: .8rem;
+  top: 1rem;
+}
+button:hover {
+  box-shadow: 1px 1px 20px rgba(150, 150, 150, 0.2);
+  top: -.1rem;
+  right: -.1rem;
+  cursor: pointer;
+}
+button:hover:before {
+  content: '_';
+  position: absolute;
+  left: .8rem;
+  top: .7rem;
+  -webkit-transform: translateY(-1px);
+          transform: translateY(-1px);
+}
+button:hover:after {
+  content: '>';
+  position: absolute;
+  left: 1.1rem;
+  top: 1rem;
+}

@@ -1,0 +1,562 @@
+﻿@import url(https://fonts.googleapis.com/css?family=Lobster);
+* {
+	font-family:Oswald;
+	margin:0;
+	padding:0;
+}
+
+.content {
+	transition:.5s;
+}
+
+.tac {
+	text-decoration:none;
+	color:red;
+}
+
+/* Footer */
+.center {
+  text-align: center;
+  margin: auto;
+}
+
+.bg-light {
+  background: #f4f4f4;
+  color: #333;
+}
+
+.bg-dark {
+  background: #333;
+  color: #f4f4f4;
+}
+
+footer {
+  padding: 10px;
+  position:relative; 
+  bottom:0; 
+}
+
+footer p {
+  margin: 0;
+}
+
+/* Menu Icons */
+.dashboard-icon {
+	padding: 0 10px;
+}
+
+.user-icon {
+	padding: 0 10px;
+}
+
+.tour-icon {
+	padding: 0 10px;
+}
+
+.booking-icon {
+	padding: 0 10px;
+}
+
+.news-icon {
+	padding: 0 10px;
+}
+
+.promotion-icon {
+	padding: 0 10px;
+}
+
+.feedback-icon {
+	padding: 0 10px;
+}
+
+.view-icon {
+	padding: 0 10px;
+}
+
+.regcode-icon {
+	padding: 0 10px;
+}
+
+/* Dashboard */
+.welcome-php {
+	font-size: 30px;
+	text-align:center;
+}
+
+.role-php {
+	color:lime;
+}
+
+.wrap{
+	width: 100%;
+	margin: 15px auto;
+	padding: 15px 10px;
+	background: white;
+	border: 2px solid #DBDBDB;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	height: 100%;
+}
+
+.important-section {
+	padding: 5px;
+	font-weight:normal !important;
+	color:red;
+}
+
+.refresh-icon {
+	cursor:pointer !important;
+}
+
+.php-error {
+	color:red!important;
+	font-size:13px !important;
+}
+
+/* Responsive Scrollable Table */
+.reg-table-td {
+	line-height: 7.5vh!important;
+}
+
+.reg-table {
+	border:0.5px solid #ddd;
+	width:100%!important;
+	height:100%!important;
+}
+
+.top10list td {
+	line-height: 8vh!important;
+}
+
+@media only screen and (max-width: 1700px) {
+  .limiter {
+    width:100%!important;
+  }
+}
+
+@media only screen and (max-width: 1080px) {
+  .limiter {
+    min-width:1080px!important;
+  }
+}
+
+@media only screen and (max-width: 921px) {
+  .limiter {
+    min-width:921px!important;
+  }
+}
+
+/* Custom Scroll bar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+.logo-img {
+	width:40px;
+	height:40px;
+	position:relative;
+    overflow:hidden;
+    padding-left:5px;
+}
+
+.hidden {
+	opacity: 0;
+	transition: .5s;
+}
+
+.transition {
+	transition:.4s;
+}
+
+.tabcontent {
+	  display: none;
+}
+
+.radio-page {
+	visibility: hidden!important;
+}
+
+.img-circle-custom {
+	border-radius:10px;
+}
+
+.chart-container {
+	width:100%;
+	height:100%;
+}
+
+#noti-image {
+	border-radius:50%!important;
+}
+
+/* registration-list.php's CSS */
+.pagination {
+  display: inline-block;
+}
+
+.pagination a.page {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  margin: 0 4px;
+}
+
+.pagination a.page.active {
+  background-color: #337AB7;
+  color: white;
+}
+
+.pagination a.page:hover:not(.active) {
+  background-color: #ddd;
+}
+
+.pagination a.page:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.pagination a.page:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.center {
+  text-align: center;
+}
+
+/* Customized Checkbox */
+/* The container */
+.regid-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.regid-container input.regid-chkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: -0.8vh;
+  left: 2.5vw;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.regid-container:hover input.regid-chkbox ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.regid-container input.regid-chkbox:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.regid-container input.regid-chkbox:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.regid-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* Verification Form */
+.verification-form {
+	position:relative!important;
+}
+
+/* Linking Table Row to monthly_report.php */
+table tr td a.report-link {
+    display:block;
+    height:100%;
+    width:100%;
+}
+
+/* Live Table Style */
+#result .alert {
+	padding: 15px!important;
+    margin-bottom: 20px!important;
+    border: 1px solid transparent!important;
+    border-radius: 4px!important;
+}
+
+#result .alert-success {
+    color: #3c763d!important;
+    background-color: #dff0d8!important;
+    border-color: #d6e9c6!important;
+}
+
+.table {
+	margin-bottom:0!important;
+	
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+	vertical-align:middle!important;	
+}
+
+/* Brand List Style */
+.glyphicon { margin-right:5px; }
+.thumbnail
+{
+    margin-bottom: 20px;
+    padding: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.item.list-group-item
+{
+    float: none;
+    width: 100%;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+.item.list-group-item:nth-of-type(odd):hover,.item.list-group-item:hover
+{
+    background: #428bca;
+}
+
+.item.list-group-item .list-group-image
+{
+    margin-right: 10px;
+}
+.item.list-group-item .thumbnail
+{
+    margin-bottom: 0px;
+}
+.item.list-group-item .caption
+{
+    padding: 9px 9px 0px 9px;
+}
+.item.list-group-item:nth-of-type(odd)
+{
+    background: #eeeeee;
+}
+
+.item.list-group-item:before, .item.list-group-item:after
+{
+    display: table;
+    content: " ";
+}
+
+.item.list-group-item img
+{
+    float: left;
+}
+.item.list-group-item:after
+{
+    clear: both;
+}
+.list-group-item-text
+{
+    margin: 0 0 11px;
+}
+
+.thumbnail {
+	height:100%!important;
+}
+
+/* Upload Image section CSS */
+.img-container {
+  position: relative;
+  width: 50%;
+  cursor: pointer;
+}
+
+.img-container-meal {
+  position: relative;
+  width: 50%;
+  cursor: pointer;
+}
+
+.preview-img {
+  opacity: 1;
+  display: block;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  height:250px;
+  width:250px;
+  border-radius:50%;
+}
+
+.preview-img-meal {
+  opacity: 1;
+  display: block;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  height:250px;
+  width:250px;
+  border-radius:50%;
+}
+
+.upload-text-container {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.upload-text-container-meal {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.img-container:hover .preview-img {
+  opacity: 0.3;
+}
+
+.img-container:hover .upload-text-container {
+  opacity: 1;
+}
+
+.img-container-meal:hover .preview-img-meal {
+  opacity: 0.3;
+}
+
+.img-container-meal:hover .upload-text-container-meal {
+  opacity: 1;
+}
+
+.upload-text {
+  color: black;
+  font-size: 16px;
+  padding: 16px 32px;
+  text-align:center;
+}
+
+.upload-text-meal {
+  color: black;
+  font-size: 16px;
+  padding: 16px 32px;
+  text-align:center;
+}
+
+/* Custom Radio Button */
+/* Customize the label (the container) */
+.radio-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow:inherit!important;
+}
+
+/* Hide the browser's default radio button */
+.radio-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark-radio {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radio-container:hover input ~ .checkmark-radio {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio-container input:checked ~ .checkmark-radio {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark-radio:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-container input:checked ~ .checkmark-radio:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio-container .checkmark-radio:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+.no-display {
+	display:none!important;
+}

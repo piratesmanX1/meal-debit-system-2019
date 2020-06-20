@@ -1,0 +1,70 @@
+﻿#SignupContent {
+		max-width: 600px;
+		border-radius: 4px;
+}
+
+.registration-container {
+	position:absolute;
+	width: 700px;
+	height:750px;
+	right:25%;
+    left:50%;
+    margin-left:-350px;
+}
+
+@media screen and (max-width: 600px) {
+		#SignupContent {
+				height: 100%;
+		}
+	#materialToolbar {
+		    padding: 10px;
+	}
+}
+
+.sign-up-in-2 a{
+	position:absolute;
+	width: 80px;
+	height:40px;
+	bottom:0;
+	right:5%;
+    margin-left:-10px;
+    font-size:18px;
+    text-decoration:none;
+    color:white;
+	transition:.5s;
+}
+
+.sign-up-in-2 a:hover {
+	color:lime;
+    text-decoration:none;
+	transition:.5s;
+}
+
+.submit-button {
+	background-color:white;
+	color:black;
+	border-radius: 25px;
+    border: 2px solid blue;
+    padding:10px 10px;
+    transition: .5s;
+    cursor:pointer;
+    font-family:Oswald;
+}
+
+.submit-button:hover {
+	background-color:blue;
+	color:white;
+    transition: .5s;
+}
+
+.php-error {
+	text-align:center;
+	color:red;
+	width:100%;
+	margin:auto;
+	padding:30px;	
+}
+
+.security-note {
+	color:red;
+}

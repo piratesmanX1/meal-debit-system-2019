@@ -1,0 +1,241 @@
+﻿/*-------------------------------------------------------- Responsive elements --------------------------------------------------------*/
+ @media only screen and (min-width: 768px) and (max-width: 959px) {
+     h1 {
+         font-size: 68px;
+    }
+     .one-text {
+         font-size: 16px;
+    }
+     #slidecaption {
+         font-size: 68px 
+    }
+     .slidedescription {
+         font-size: 12px 
+    }
+     .slider-text {
+         bottom: 60px;
+    }
+     .bg1, .bg3 {
+         background-size: 150%;
+    }
+     .bg2 {
+         background-size: 1280px;
+    }
+     #contact {
+         background-size: 1437px;
+    }
+     .item {
+         height: 167px;
+    }
+     .ib-text {
+         padding-right: 26%;
+    }
+}
+ @media only screen and (width: 1024px) {
+     #contact {
+         background-size: 1210px;
+    }
+     .card {
+         margin: 60px 0 0 0;
+    }
+}
+ @media only screen and (max-width: 767px) {
+     h1 {
+         font-size: 54px;
+         line-height: 1;
+    }
+     .one-text {
+         font-size: 14px;
+    }
+     .project-title {
+         font-size: 14px;
+    }
+     .project-description {
+         font-size: 11px;
+    }
+     #slidecaption {
+         font-size: 36px
+    }
+     .lines {
+         font-size: 24px;
+    }
+     #contact {
+         height: auto;
+    }
+     .contact-social-icons li a {
+         width: 40px;
+         height: 40px;
+         font-size: 20px;
+    }
+     .contact-social-icons li {
+         margin: 0 5px 0 5px;
+    }
+     .links {
+         display: none;
+    }
+     .dropmenu {
+         display: block;
+         margin-top: 5px;
+    }
+     .logo {
+         width: 180px;
+         height: auto;
+    }
+     .slidedescription {
+         display: none;
+    }
+     .line {
+         width: 80px;
+         margin-bottom: 20px;
+    }
+     .social-icons {
+         position: absolute;
+         top: 4px;
+         right:10px;
+         margin-top: 0;
+    }
+     .social-icons li a {
+         width: 18px;
+         height: 18px;
+         line-height: 1.8;
+         font-size: 10px;
+    }
+     nav {
+         height: 30px;
+    }
+     #homepage {
+         margin-bottom: -30px;
+    }
+     .slider-text {
+         bottom: 50px;
+         min-height: 80px;
+    }
+     #about, #culture, #services, #portfolio {
+         padding-top: 32px;
+         padding-bottom: 40px;
+    }
+     #prevslide, #nextslide{
+         position:absolute;
+         height:15px;
+         width:15px;
+         top:50px;
+         margin-top:-21px;
+         opacity:0.6;
+    }
+     #culture h4 {
+         padding-top: 27px;
+    }
+     .bg1, .bg2, .bg3 {
+         background-attachment: scroll;
+         background-size: cover;
+    }
+     .column .img-wrp {
+         margin: 40px 0px 14px;
+    }
+     #prevslide{
+         right:55px;
+         font-size: 16px;
+    }
+     #nextslide{
+         right:30px;
+         font-size: 16px;
+    }
+     #contact {
+         background-size: cover;
+    }
+     .item {
+         height: 330px;
+    }
+     .selectnav {
+         display: block;
+         margin-top: 5px;
+    }
+     .option-set {
+         margin-left: 0;
+    }
+     .culture-full {
+         padding: 40px 0px 40px 0px;
+         margin: 40px 0px 14px 0px;
+    }
+     .info-block a.button {
+         position: inherit;
+         margin-top: 20px;
+    }
+     .ib-text {
+         padding-right: 0;
+    }
+     .post-title {
+         font-size: 36px;
+    }
+     p.lead {
+         font-size: 14px;
+    }
+     .image-caption {
+         display: none;
+    }
+     .blog-sidebar {
+         display: none;
+    }
+     .post-info span {
+         float: left;
+         text-align: left;
+         margin-top: 5px;
+    }
+}
+ @media only screen and (max-width: 479px) {
+     .lines, .adress{
+         font-size: 18px;
+    }
+     .slider-text {
+         bottom: 50px;
+         min-height: 100px;
+    }
+     #prevslide, #nextslide{
+         position:absolute;
+         height:15px;
+         width:15px;
+         top:100px;
+         opacity:0.6;
+    }
+     #prevslide{
+         left:0;
+    }
+     #nextslide{
+         left:25px;
+    }
+     .logo {
+         top: 20px;
+    }
+     .item {
+         height: 254px;
+    }
+}
+ @media only screen and (min-width: 1400px) {
+     nav .container, #homepage .container, #homepage .container .sixteen.columns {
+         width: 96%;
+    }
+     nav .three.columns {
+         float: right;
+    }
+     .slider-text {
+         width: 100%;
+    }
+     .line {
+         width: 180px;
+    }
+     #parallax1, #parallax2, #parallax3, #parallax1 .vertical-text, #parallax2 .vertical-text, #parallax3 .vertical-text, #parallax1 .pattern, #parallax2 .pattern, #parallax3 .pattern {
+         height: 600px;
+    }
+     #prevslide, #nextslide{
+         position:absolute;
+         height:30px;
+         width:30px;
+         top:210px;
+         margin-top:-21px;
+         opacity:0.6;
+    }
+     .bg1, .bg2, .bg3 {
+         background-size: 100%;
+    }
+}
+ 

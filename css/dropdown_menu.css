@@ -1,0 +1,86 @@
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropdown-content {
+  display: block!important;
+  overflow: visible !important;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 208px;
+  z-index: 9999;
+  background-color: #62a2e5;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  border-radius:0!important;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block!important;
+  overflow: auto !important;
+}
+
+.mainmenu-area .right-button a {
+  display:inherit!important;
+  background-color: inherit!important;
+  letter-spacing: inherit!important;
+  padding: 10px!important;
+}
+
+a.logout:hover {
+  transition: 0.5s;
+  color: red!important;
+}
+
+@media only screen and (max-width: 1295px) {
+  .fa-shopping-cart {
+    display: none!important;
+  }
+}
+
+@media only screen and (max-width: 1296px) {
+  .meal-total-price {
+    position: absolute!important;
+    padding-top: 30px!important;
+    right: 4vw!important;
+  }
+  .total-price-order {
+    padding-left: 7vw!important;
+    padding-right: 4.8vw!important;
+  }
+}
+
+@media only screen and (max-width: 880px) {
+  .navbar {
+    display: none!important;
+  }
+}

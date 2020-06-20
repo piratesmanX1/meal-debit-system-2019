@@ -1,0 +1,134 @@
+﻿<?php
+// we will only start the session with session_start() IF the session isn't started yet //
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
+<?php
+// including the conn.php to establish connection with database //
+  include "conn.php";
+?>
+
+<?php
+	if (empty($_SESSION['user_id'])) {
+		echo "<script>alert('Notice: You still didn\'t log in yet, please login first to proceed to Transaction Record list.');";
+		echo "window.location.href='logout.php';</script>";
+	}
+?>
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Profile Page | Meal-Debit System </title>
+        <link rel="icon" href="image/logo_symbol.png" type="image/ico"/>
+        <!-- Footer Style -->
+        <link rel="stylesheet" href="vendor/freebie-footer-templates/css/demo.css">
+        <link rel="stylesheet" href="vendor/freebie-footer-templates/css/footer-distributed-with-address-and-phones.css">
+        <!-- Vendor Style -->
+        <link rel="stylesheet" type="text/css" href="vendor/css/all.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Custom Style -->
+        <link rel="stylesheet" type="text/css" href="css/fundamentals.css">
+        <link rel="stylesheet" type="text/css" href="css/parallax_slider.css">
+        <link rel="stylesheet" href="css/loading....css" type="text/css">
+        <link rel="stylesheet" type="text/css" href="css/welcome_preloader.css">
+        <link rel="stylesheet" type="text/css" href="css/profile_page.css">
+        <!-- JQuery -->
+        <script type="text/javascript" src="vendor/js/prototype.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <!-- Custom Font Style -->
+        <link href='http://fonts.googleapis.com/css?family=Oswald|Open+Sans:400,600' rel='stylesheet' type='text/css'>
+        <!-- Loading Script -->
+	 <script type="text/javascript">
+	 	$(window).on("load",function(){
+	 		$(".preloader").addClass("complete")
+	 		})
+	 </script>
+</head>
+
+<body>
+	<script type="text/javascript" src="js/scroll_effect.js"></script>
+	<!-- Loading the Page OP -->
+		<div class="preloader">
+			<div class="loader">
+			</div>
+		</div>
+<!-- Loading the Page ED -->
+
+<script type="text/javascript">
+// Appearance of all content
+            $(function() {
+                setTimeout(function() {
+                    $(".page").removeClass("hidden");
+                }, 1500);
+            })();
+</script>
+<div class="page hidden">
+	<span class="menu-toggle">
+		<i class="menu-open fa fa-bars fa-lg"></i>
+		<i class="menu-close fa fa-times fa-lg"></i>
+	</span>
+
+  <div class="page hidden">
+      <span class="menu-toggle"> <i class="menu-open fa fa-bars fa-lg" style="padding-top:10px!important"></i> <i class="menu-close fa fa-times fa-lg"></i> </span>
+      <ul class="menu-items">
+          <img class="menu-logo-pic" alt="Meal-Debit System" src="image/logo_symbol.png">
+          <li>
+              <a href="homepage.html"><i class="fas fa-home home-icon"></i>Home</a>
+          </li>
+          <li>
+              <a href="public_meal_list.html"><i class="fas fa-clipboard-list faq-icon"></i>List of Meals</a>
+          </li>
+          <li>
+              <a href="homepage.html#about"><i class="fas fa-book about-icon"></i>About</a>
+          </li>
+      </ul>
+  	<!-- Stuff inside the page -->
+	<div id="content" class="content">
+		<?php
+			if (isset($_SESSION['user_id'])) {
+  				include "nav_bar_logged.php";
+			} else {
+  				include "nav_bar_normal.php";
+  			}
+  		?>
+      <div id="transaction_record_section">
+		    <?php
+        	include_once('transaction_record_list.php');
+        ?>
+      </div>
+        </div>
+    </div>
+	</div>
+
+<!-- Off Canvas Script -->
+<script type="text/javascript">
+	var $page=$(".page");
+
+	$(".menu-toggle").on("click",function() {
+		$page.toggleClass("shazam");
+	});
+
+	$(".content").on("click",function() {
+		$page.removeClass("shazam");
+	});
+</script>
+	<!-- Changing content of Transaction Record table to another page of table -->
+    <script type="text/javascript">
+	function transTable(number) {
+	// take the value of the link clicked //
+		var page_count = number.getAttribute('value');
+		xmlhttp=new XMLHttpRequest();
+		// then put into it to refresh it //
+		xmlhttp.open("GET", "transaction_record_list.php?page=" + page_count ,false);
+		xmlhttp.send(null);
+		document.getElementById('transaction_record_section').innerHTML=xmlhttp.responseText;
+	}
+</script>
+
+</body>
+</html>

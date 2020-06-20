@@ -1,0 +1,326 @@
+﻿<!DOCTYPE HTML>
+
+<?php
+// we will only start the session with session_start() IF the session isn't started yet //
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
+<?php
+// including the conn.php to establish connection with database //
+  include "conn.php";
+?>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Home | Meal-Debit System </title>
+        <link rel="icon" href="image/logo_symbol.png" type="image/ico"/>
+        <!-- Footer Style -->
+        <link rel="stylesheet" href="vendor/freebie-footer-templates/css/demo.css">
+        <link rel="stylesheet" href="vendor/freebie-footer-templates/css/footer-distributed-with-address-and-phones.css">
+        <!-- Vendor Style -->
+        <link rel="stylesheet" type="text/css" href="vendor/css/all.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Custom Style -->
+        <link rel="stylesheet" type="text/css" href="css/fundamentals.css">
+        <link rel="stylesheet" type="text/css" href="css/parallax_slider.css">
+        <link rel="stylesheet" href="css/loading....css" type="text/css">
+        <link rel="stylesheet" type="text/css" href="css/welcome_preloader.css">
+        <!-- JQuery -->
+        <script type="text/javascript" src="vendor/js/prototype.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <!-- Custom Font Style -->
+        <link href='http://fonts.googleapis.com/css?family=Oswald|Open+Sans:400,600' rel='stylesheet' type='text/css'>
+        <!-- Loading Script -->
+        <script type="text/javascript">
+	 	$(window).on('load',function(){
+	 		$('.preloader').addClass('complete')
+	 		})
+	 </script>
+    </head>
+    <body>
+        <script type="text/javascript" src="js/scroll_effect.js"></script>
+        <!-- Loading the Page OP -->
+        <div class="preloader">
+            <div class="loader">
+			</div>
+        </div>
+        <!-- Loading the Page ED -->
+        <!-- WELCOME TEXT -->
+        <ul class="fly-in-text hidden">
+            <li>W</li>
+            <li>E</li>
+            <li>L</li>
+            <li>C</li>
+            <li>O</li>
+            <li>M</li>
+            <li>E</li>
+        </ul>
+        <script type="text/javascript">
+// Appearance of Welcome Text
+            $(function() {
+                setTimeout(function() {
+                    $('.fly-in-text').removeClass('hidden');
+                }, 500);
+            })();
+</script>
+        <script type="text/javascript">
+// Dissapearance of Welcome Text
+            $(function() {
+                setTimeout(function() {
+                    $('.fly-in-text').addClass('transition');
+                }, 3500);
+            })();
+</script>
+        <script type="text/javascript">
+// Appearance of all content
+            $(function() {
+                setTimeout(function() {
+                    $('.page').removeClass('hidden');
+                }, 2000);
+            })();
+</script>
+        <script type="text/javascript">
+		// Menu-toggle button
+      	$(document).ready(function() {
+            $(".menu-icon").on("click", function() {
+                  $(".nav-bar. ul").toggleClass("showing");
+            });
+      	});
+		</script>
+        <div class="page hidden">
+            <span class="menu-toggle"> <i class="menu-open fa fa-bars fa-lg" style="padding-top:10px!important"></i> <i class="menu-close fa fa-times fa-lg"></i> </span>
+            <ul class="menu-items">
+                <img class="menu-logo-pic" alt="Meal-Debit System" src="image/logo_symbol.png">
+                <li>
+                    <a href="homepage.html"><i class="fas fa-home home-icon"></i>Home</a>
+                </li>
+                <li>
+                    <a href="public_meal_list.html"><i class="fas fa-clipboard-list faq-icon"></i>List of Meals</a>
+                </li>
+                <li>
+                    <a href="homepage.html#about"><i class="fas fa-book about-icon"></i>About</a>
+                </li>
+            </ul>
+            <!-- Stuff inside the page -->
+            <div id="content" class="content">
+                <!-- Home Page -->
+                <!-- PHP Nav Login -->
+                <?php
+			if (isset($_SESSION['user_id'])) {
+  				include "nav_bar_logged.php";
+			} else {
+  				include "nav_bar_normal.php";
+  			}
+  			?>
+                <div class="background-slide">
+                    <!-- Slide Show -->
+                    <div class="slider">
+                        <div class="slide-1">
+                            <div class="transparency">
+                                <div class="line">
+                                    <hr>
+                                </div>
+                                <div class="slider-caption">
+                                    <h4>Meal-Debit System</h4>
+                                </div>
+                                <div class="slider-description">
+                                    <h2>A system with optimization</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide-2">
+                            <div class="transparency">
+                                <div class="line">
+                                    <hr>
+                                </div>
+                                <div class="slider-caption">
+                                    <h4>Enjoy your meal</h4>
+                                </div>
+                                <div class="slider-description">
+                                    <h2>Where we provides all kinds of services</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide-3">
+                            <div class="transparency">
+                                <div class="line">
+                                    <hr>
+                                </div>
+                                <div class="slider-caption">
+                                    <h4>Decide your meal with ease</h4>
+                                </div>
+                                <div class="slider-description">
+                                    <h2>And enjoy the moment of life</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="logo">
+                        <img style="width:340px!important;height:100px!important;padding-bottom:20px!important" alt="Meal-Debit System" src="image/logo.png"/>
+                    </div>
+                </div>
+                <div class="background-image">
+                    <img alt="Oh No!" src="image/black.jpg">
+                </div>
+                <div class="nav-bar">
+                    <ul>
+                        <li>
+                            <a href="#about">About</a>
+                        </li>
+                        <li>
+                        	<a href="#trending">Trending</a>
+                        </li>
+                        <li>
+                            <a href="#faq">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="#services">Services</a>
+                        </li>
+                        <li>
+                            <a class="region-to-travel" href="public_meal_list.html">List of Meals</a>
+                        </li>
+                        <li>
+                            <a class="top" href="#content"><i class="fas fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <script type="text/javascript">
+		// Menu-toggle button
+      	$(document).ready(function() {
+            $(".menu-icon").on("click", function() {
+                  $(".nav-bar. ul").toggleClass("showing");
+            });
+      	});
+		</script>
+                <!-- About -->
+                <div id="about" class="about">
+                    <div class="about-history" style="padding-bottom:30px!important;">
+                        <h4>About Meal-Debit System</h4>
+                        <p>Meal-Debit System is an optimized system which founded in 1925. The system strive to provide the education sectors the ease of management of their internal debit system for the shops. Of course, all of these info are fake and I am actually making things up so don't waste your time to continue reading these made up info, since I'm just trying to fullfil the word capacity to beautify the website, I know Lorem Ipsum is good for it, I just want to leave some easter egg within the first page, so yeah. Why you are still reading? Go and check for the system already!</p>
+                    </div>
+                    <div class="about-founders">
+                        <h1><img src="image/logo_2.png" alt="logo_2" style="width:300px;height:130px;"/></h1>
+                    </div>
+                </div>
+                <!-- Trending -->
+                <div id="trending" class="about">
+    			</div>
+                <!-- FAQ -->
+                <div id="faq">
+				</div>
+                <div class="parallax-effect">
+                    <div class="parallax-image-1">
+                        <div class="transparency">
+                            <h2>"One cannot think well, love well, sleep well, if one has not dined well." <br> - Virginia Woolf - </h2>
+                        </div>
+                    </div>
+                </div>
+                <!-- Services -->
+                <div id="services" class="services">
+                    <h4>Services</h4>
+                    <div class="services-cen">
+                        <div class="service">
+                            <i class="fa fa-phone-square" aria-hidden="true"></i>
+                            <h2>Feedbacks</h2>
+                            <p>Ensuring your feedbacks will be reviewed and discussed by us.</p>
+                        </div>
+                        <div class="service">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                            <h2>Meal Quality</h2>
+                            <p>We will ensure the qualities won't be a disapointment.</p>
+                        </div>
+                        <div class="service">
+                            <i class="fa fa-money"></i>
+                            <h2>Prices</h2>
+                            <p>Meals on our platform will be always affordable.</p>
+                        </div>
+                        <div class="service">
+                            <i class="fas fa-apple-alt"></i>
+                            <h2>Meals</h2>
+                            <p>Ensure you will have a variety of choices to choose.</p>
+                        </div>
+                        <div class="service">
+                            <i class="fa fa-address-card" aria-hidden="true"></i>
+                            <h2>Employees</h2>
+                            <p>Our employees will confirmed to satisfy your expectations.</p>
+                        </div>
+                        <div class="service">
+                            <i class="fas fa-angry"></i>
+                            <h2>Customer</h2>
+                            <p>Unsatisfied of our services? Let us know!</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- contact-->
+                <div id="contact" class="contact">
+                    <div class="parallax-effect">
+                        <div class="parallax-image-contact">
+                            <div class="transparency">
+							</div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="footer-distributed" style="font-family:oswald!important">
+                    <div class="footer-left">
+                        <p class="footer-links"> <a href="#content">HOME</a> <br> <a href="#about">ABOUT</a> <br> <a href="#faq">FAQ</a> <br> <a href="#trending">TRENDING</a> </p>
+                        <img src="image/logo.png" alt="logo" style="width: 50%;height: 50%; padding-bottom:10px!important; padding-top:10px!important"/>
+                        <p class="footer-company-name"> Meal-Debit System &copy; 2019</p>
+                        <p class="footer-company-name">Disclaimer: All the content displayed belongs to their rightful owner.</p>
+                    </div>
+                    <div class="footer-center">
+                        <div>
+                            <i class="fa fa-map-marker"></i>
+                            <p><span>21 Revolution Street</span> Paris, France</p>
+                        </div>
+                        <div>
+                            <i class="fa fa-phone"></i>
+                            <p>+1 555 123456</p>
+                        </div>
+                        <div>
+                            <i class="fa fa-envelope"></i>
+                            <p><a href="mailto:meal-debitsystem@company.com">meal-debitsystem@company.com</a></p>
+                        </div>
+                    </div>
+                    <div class="footer-right">
+                        <p class="footer-company-about"> <span>About the system</span>
+					Meal-Debit System is an optimized system which founded in 1925. The system strive to provide the education sectors the ease of management of their internal debit system for the shops. </p>
+                        <div class="footer-icons">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-github"></i></a>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <!-- Sticky Nav Bar Script -->
+        <script type="text/javascript">
+  $(document).on('scroll',function(){
+     if ($(document).scrollTop() > 605) {
+         $('.nav-bar').addClass('fixed')
+     } else {
+         $('.nav-bar').removeClass('fixed')
+     }
+
+  });
+</script>
+        <!-- Off Canvas Script -->
+        <script type="text/javascript">
+	var $page=$('.page');
+
+	$('.menu-toggle').on('click',function() {
+		$page.toggleClass('shazam');
+	});
+
+	$('.content').on('click',function() {
+		$page.removeClass('shazam');
+	});
+</script>
+    </body>
+</html>

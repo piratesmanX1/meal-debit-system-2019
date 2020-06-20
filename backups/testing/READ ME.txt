@@ -1,0 +1,5 @@
+admin_panel: 
+The previous version where the tabs can be specifically load into a specific page. No longer used since the newest version is using Ajax to load the content instead of going in to the related page. The newest stuff saved bunch of background process.
+
+admin_panel_backup:
+Just a demo when trying to improve and figured a way to solve the issues like Ajax loading content, refresh CSS, and fixed the SYNTAX error of the javascript where it doesnt allow onclick feature.

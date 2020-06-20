@@ -1,0 +1,768 @@
+﻿<!DOCTYPE HTML>
+<html>
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+	include_once('conn.php');
+?>
+
+<?php
+	if (($_SESSION['status']) < 1) {
+		echo "<script>alert('You are not allowed to enter this site, ".$_SESSION['role']." ".$_SESSION['last_name'].".');";
+		echo "window.location.href='logout.php';</script>";
+	}
+?>
+
+<head>
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	 <title> Admin Panel | Meal-Debit System </title>
+	 <link rel="icon" type="image/png" href="image/logo_symbol.png"/>
+	 <link rel="stylesheet" type="text/css" href="vendor/fontawesome-free/css/all.min.css">
+	 <link rel="stylesheet" href="css/loading....css" type="text/css">
+	 <link rel="stylesheet" type="text/css" href="admin_panel.css">
+
+	 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	 <link href='http://fonts.googleapis.com/css?family=Oswald|Open+Sans:400,600' rel='stylesheet' type='text/css'>
+	 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	 
+	 <!-- Loading Script -->
+	 <script type="text/javascript">
+	 	$(window).on('load',function(){
+	 		$('.preloader').addClass('complete')
+	 		})
+	 </script>
+</head>
+
+<body class="content hidden">
+<!-- Loading the Page OP -->
+	<div class="preloader">
+		<div class="loader">
+		</div>
+	</div>
+<!-- Loading the Page ED -->
+
+<script type="text/javascript">
+// Appearance of all content
+            $(function() {
+                setTimeout(function() {
+                    $('.content').removeClass('hidden');
+                }, 1500);
+            })();
+</script>
+
+<div class="navigation">
+    <h2>Admin-Panel</h2>
+    <ul>
+    	<li><a href="logout.php"><i class="fas fa-power-off log-out"></i>LOG OUT</a></li>
+    </ul>
+</div>
+
+<div id="content" class="admin-panel hidden">
+    <div class="tab">
+		<ul>
+            <li>
+                <a class="tab-active" data-index="0" href="#"><i class="fas fa-chalkboard dashboard-icon"></i>Dashboard</a>
+            </li>
+            <li>
+                <a data-index="1" href="#"><i class="fas fa-users user-icon"></i>Users</a>
+            </li>
+            <li>
+                <a data-index="2" href="#"><i class="fas fa-plane-departure tour-icon"></i>Registration</a>
+            </li>
+            <li>
+                <a data-index="3" href="#"><i class="fas fa-shopping-cart booking-icon"></i>Meal</a>
+            </li>
+            <li>
+                <a data-index="4" href="#"><i class="fas fa-newspaper news-icon"></i>VCODE</a>
+            </li>
+            <li>
+                <a data-index="5" href="#"><i class="fas fa-newspaper news-icon"></i>Report</a>
+            </li>
+        </ul>
+        
+        <div class="content">
+            <div class="dashboard content-active">
+							<p class="welcome-php">Welcome Back,
+								<b class="role-php">
+									<?php
+										if ($_SESSION['status'] > 1) {
+											echo "Admin";
+										} else {
+											echo "CRACKER";
+											session_destroy();
+							                ob_start();
+							                // It will return to homepage automatically //
+							                echo "<script>alert('ALERT: You\'re not authorized in this region, and will automatically log you out.');";
+							                echo "window.location.href='login.html';</script>";
+							                ob_end_flush();					
+										}
+									?>
+								</b>
+								<?php echo $_SESSION['last_name']; ?>
+							</p>
+							<p class="last-login-php">Last Login:
+								<?php echo $_SESSION['last_login']; ?>
+							</p>
+							<br>
+							<section class="wrap">
+								<section>
+  									<h1 class="filter-title"> Filters </h1>
+  									<section class="byUser">
+    									<span class="search-label">All post by Founders : </span>
+    									<input type="text" class="search-bar" id="selUser" placeholder="Search..." title="Type the keywords." />
+  									</section>
+								</section>
+							</section>
+							<section class="wrap">
+  								<section>
+  									<h1 class="notice-title">Notice Board: </h1>
+  									<section id="refresh" title="Click to reload"><i class="fas fa-sync-alt refresh-icon" onclick="refresh()"></i> REFRESH</section>
+  								</section>
+  								<hr>
+  								<span id="news-section">
+									<?php
+										include_once('10_Dashboard_Notice.php');
+									?>
+									</span>
+<!-- By default the Upload form will be hidden unless the checkbox is checked, when checkbox is checked making the input forms required. -->
+<!-- Upload News Section -->
+<script>
+function toggleBoxVisibility() {
+    if (document.getElementById("upload-form").checked == true) {
+        document.getElementById("upload-section").style.display = "block";
+        $("#notice-title").prop("required", true);
+        $("#notice-status").prop("required", true);
+        $("#notice-content").prop("required", true);
+    } else {
+        document.getElementById("upload-section").style.display = "none";
+        $("#notice-title").prop("required", false);
+        $("#notice-status").prop("required", false);
+        $("#notice-content").prop("required", false);
+    }
+}
+</script>
+<!-- User Suspend -->
+<script>
+function toggleBoxVisibilityUSER() {
+    if (document.getElementById("suspend-form").checked == true) {
+        document.getElementById("suspend-section").style.display = "block";
+        $("#confirm-regcode").prop("required", true);
+        $("#suspend-content").prop("required", true);
+    } else {
+        document.getElementById("suspend-section").style.display = "none";
+        $("#confirm-regcode").prop("required", false);
+        $("#suspend-content").prop("required", false);
+    }
+}
+</script>
+<!-- REGCode Section -->
+<script>
+function toggleBoxVisibilityREG() {
+    if (document.getElementById("reg-form").checked == true) {
+        document.getElementById("reg-section").style.display = "block";
+        $("#confirm-regcode-upload").prop("required", true);
+        $("#confirm-confirm-regcode").prop("required", true);
+    } else {
+        document.getElementById("reg-section").style.display = "none";
+        $("#confirm-regcode-upload").prop("required", false);
+        $("#confirm-confirm-regcode").prop("required", false);
+    }
+}
+</script>
+<!-- Promotion Section: Manage/Edit/Update -->
+<script>
+function toggleBoxVisibilityPROMO() {
+    if (document.getElementById("promo-form").checked == true) {
+        document.getElementById("promotion-section").style.display = "block";
+        $("#promo-title").prop("required", true);
+        $("#random-code").prop("required", true);
+        $("#promo-region").prop("required", true);
+        $("#promo-start-date").prop("required", true);
+        $("#promo-end-date").prop("required", true);
+        $("#promo-percent").prop("required", true);
+        $("#promotion-content").prop("required", true);
+        $("#promotion-photo").prop("required", true);
+        $("#promotion-photo").prop("required", true);
+        $("#confirm-regcode-promotion").prop("required", true);
+        $("#confirm-confirm-regcode-promotion").prop("required", true);
+    } else {
+        document.getElementById("promotion-section").style.display = "none";
+        $("#promo-title").prop("required", false);
+        $("#random-code").prop("required", false);
+        $("#promo-region").prop("required", false);
+        $("#promo-start-date").prop("required", false);
+        $("#promo-end-date").prop("required", false);
+        $("#promo-percent").prop("required", false);
+        $("#promotion-content").prop("required", false);
+        $("#promotion-photo").prop("required", false);
+        $("#confirm-regcode-promotion").prop("required", false);
+        $("#confirm-confirm-regcode-promotion").prop("required", false);
+    }
+}
+</script>
+<!-- Promotion Section: Disable -->
+<script>
+function toggleBoxVisibilityPROMO_D() {
+    if (document.getElementById("promo-form-D").checked == true) {
+        document.getElementById("promotion-section-D").style.display = "block";
+        $("#suspend-reason-promo").prop("required", true);
+        $("#confirm-regcode-promotion-D").prop("required", true);
+        $("#confirm-confirm-regcode-promotion-D").prop("required", true);
+    } else {
+        document.getElementById("promotion-section-D").style.display = "none";
+        $("#promo-title").prop("required", false);
+        $("#confirm-regcode-promotion-D").prop("required", false);
+        $("#confirm-confirm-regcode-promotion-D").prop("required", false);
+    }
+}
+</script>
+<!-- Tour Package Section: Manage/Edit/Update -->
+<script>
+function toggleBoxVisibilityTOUR() {
+    if (document.getElementById("tour-form").checked == true) {
+        document.getElementById("tour-section").style.display = "block";
+        $("#tour-title").prop("required", true);
+        $("#package-region").prop("required", true);
+        $("#tour-option").prop("required", true);
+        $("#tour-start-date").prop("required", true);
+        $("#tour-end-date").prop("required", true);
+        $("#tour-quantity").prop("required", true);
+        $("#tour-cost").prop("required", true);
+        $("#tour-content").prop("required", true);
+        $("#tour-photo-1").prop("required", true);
+        $("#tour-photo-2").prop("required", true);
+        $("#tour-photo-3").prop("required", true);
+        $("#tour-word-1").prop("required", true);
+        $("#tour-word-2").prop("required", true);
+        $("#tour-word-3").prop("required", true);
+        $("#confirm-regcode-tour").prop("required", true);
+        $("#confirm-confirm-regcode-tour").prop("required", true);
+    } else {
+        document.getElementById("tour-section").style.display = "none";
+        $("#tour-title").prop("required", false);
+        $("#package-region").prop("required", false);
+        $("#tour-option").prop("required", false);
+        $("#tour-start-date").prop("required", false);
+        $("#tour-end-date").prop("required", false);
+        $("#tour-quantity").prop("required", true);
+        $("#tour-cost").prop("required", false);
+        $("#tour-content").prop("required", false);
+        $("#tour-photo-1").prop("required", false);
+        $("#tour-photo-2").prop("required", false);
+        $("#tour-photo-3").prop("required", false);
+        $("#tour-word-1").prop("required", false);
+        $("#tour-word-2").prop("required", false);
+        $("#tour-word-3").prop("required", false);
+        $("#confirm-regcode-tour").prop("required", false);
+        $("#confirm-confirm-regcode-tour").prop("required", false);
+    }
+}
+</script>
+<!-- Tour Package Section: Disable -->
+<script>
+function toggleBoxVisibilityTOUR_D() {
+    if (document.getElementById("tour-form-D").checked == true) {
+        document.getElementById("tour-section-D").style.display = "block";
+        $("#suspend-reason-tour").prop("required", true);
+        $("#confirm-regcode-promotion-T-D").prop("required", true);
+        $("#confirm-confirm-regcode-promotion-T-D").prop("required", true);
+    } else {
+        document.getElementById("tour-section-D").style.display = "none";
+        $("#suspend-reason-tour").prop("required", false);
+        $("#confirm-regcode-promotion-T-D").prop("required", false);
+        $("#confirm-confirm-regcode-promotion-T-D").prop("required", false);
+    }
+}
+</script>
+<!-- Commercial News Section: Disable Form -->
+<script>
+function toggleBoxVisibilityNEWS() {
+    if (document.getElementById("news-form").checked == true) {
+        document.getElementById("news-section-form").style.display = "block";
+        $("#news-title").prop("required", true);
+        $("#news-content").prop("required", true);
+        $("#news-photo").prop("required", true);
+        $("#confirm-regcode-news").prop("required", true);
+        $("#confirm-confirm-regcode-news").prop("required", true);
+    } else {
+        document.getElementById("news-section-form").style.display = "none";
+        $("#news-title").prop("required", false);
+        $("#news-content").prop("required", false);
+        $("#news-photo").prop("required", false);
+        $("#confirm-regcode-news").prop("required", false);
+        $("#confirm-confirm-regcode-news").prop("required", false);
+    }
+}
+</script>
+<!-- Commercial News Section: Disable Form -->
+<script>
+function toggleBoxVisibilityNEWS_D() {
+    if (document.getElementById("news-form-D").checked == true) {
+        document.getElementById("news-section-D").style.display = "block";
+        $("#suspend-reason-news").prop("required", true);
+        $("#confirm-regcode-news-D").prop("required", true);
+        $("#confirm-confirm-regcode-news-D").prop("required", true);
+    } else {
+        document.getElementById("news-section-D").style.display = "none";
+        $("#suspend-reason-news").prop("required", false);
+        $("#confirm-regcode-news-D").prop("required", false);
+        $("#confirm-confirm-regcode-news-D").prop("required", false);
+    }
+}
+</script>
+<!-- Refresh Notice Dashboard Script -->
+<script type="text/javascript">
+function refresh() {
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("POST","10_Dashboard_Notice.php",false);
+	xmlhttp.send(null);
+	document.getElementById("news-section").innerHTML=xmlhttp.responseText;
+}
+</script>
+<!-- Refresh User Info Script -->
+<script type="text/javascript">
+function refresh_user() {
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("POST","10_User_Section.php",false);
+	xmlhttp.send(null);
+	document.getElementById("user-section").innerHTML=xmlhttp.responseText;
+}
+</script>
+<!-- Refresh REG Section Script -->
+<script type="text/javascript">
+function refresh_REG() {
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("POST","10_REGCODE_Section.php",false);
+	xmlhttp.send(null);
+	document.getElementById("reg-section-pointer").innerHTML=xmlhttp.responseText;
+}
+</script>
+<!-- Refresh Promotion Section Script -->
+<script type="text/javascript">
+function refresh_PROMO() {
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("POST","10_Promotion_Section.php",false);
+	xmlhttp.send(null);
+	document.getElementById("promotion-section-pointer").innerHTML=xmlhttp.responseText;
+}
+</script>
+<!-- Refresh Tour Package Section Script -->
+<script type="text/javascript">
+function refresh_TOUR() {
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("POST","10_Tour_Section.php",false);
+	xmlhttp.send(null);
+	document.getElementById("tour-section-pointer").innerHTML=xmlhttp.responseText;
+}
+</script>
+<!-- Refresh Tour Package Section Script -->
+<script type="text/javascript">
+function refresh_NEWS() {
+	xmlhttp=new XMLHttpRequest();
+	xmlhttp.open("POST","10_News_Section.php",false);
+	xmlhttp.send(null);
+	document.getElementById("news-section-pointer").innerHTML=xmlhttp.responseText;
+}
+</script>
+<!-- Required at least 1 checkbox checked -->
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#form-btn-delete').click(function() {
+      checked = $("input[type=checkbox]:checked").length;
+
+      if(!checked) {
+        alert("You must check at least one checkbox.");
+        return false;
+      }
+
+    });
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#form-btn-disable').click(function() {
+      checked = $("input[type=checkbox]:checked").length;
+
+      if(!checked) {
+        alert("You must check at least one checkbox.");
+        return false;
+      }
+
+    });
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#form-btn-enable').click(function() {
+      checked = $("input[type=checkbox]:checked").length;
+
+      if(!checked) {
+        alert("You must check at least one checkbox.");
+        return false;
+      }
+
+    });
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#edit-notice').click(function() {
+      checked = $("input[type=checkbox]:checked").length;
+
+      if(!checked) {
+        alert("You must check at least one checkbox.");
+        return false;
+      }
+
+    });
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#form-btn-enable-user').click(function() {
+      checked = $("input[type=checkbox]:checked").length;
+
+      if(!checked) {
+        alert("You must check at least one checkbox.");
+        return false;
+      }
+
+    });
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#form-btn-delete-regcode').click(function() {
+      checked = $("input[type=checkbox]:checked").length;
+
+      if(!checked) {
+        alert("You must check at least one checkbox.");
+        return false;
+      }
+
+    });
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#form-btn-enable-user').click(function() {
+      checked = $("input[type=checkbox]:checked").length;
+
+      if(!checked) {
+        alert("You must check at least one checkbox.");
+        return false;
+      }
+
+    });
+});
+</script>
+<!-- Check Password -->
+<script>
+function check() {
+  if (document.getElementById('confirm-regcode-upload').value ==
+    document.getElementById('confirm-confirm-regcode').value) {
+    document.getElementById('regcode-message').style.color = 'green';
+    document.getElementById('regcode-message').innerHTML = 'Notice: REGCODE Matching...';
+    document.getElementById('upload-reg').disabled = false;
+  } else {
+    document.getElementById('regcode-message').style.color = 'red';
+    document.getElementById('regcode-message').innerHTML = 'Warning: REGCODE Not Match!';
+    document.getElementById('upload-reg').disabled = true;
+  }
+}
+</script>
+<script>
+function checkREG() {
+  if (document.getElementById('confirm-regcode-promotion').value ==
+    document.getElementById('confirm-confirm-regcode-promotion').value) {
+    document.getElementById('promo-message').style.color = 'green';
+    document.getElementById('promo-message').innerHTML = 'Notice: REGCODE Matching...';
+    document.getElementById('submit-promo').disabled = false;
+  } else {
+    document.getElementById('promo-message').style.color = 'red';
+    document.getElementById('promo-message').innerHTML = 'Warning: REGCODE Not Match!';
+    document.getElementById('submit-promo').disabled = true;
+  }
+}
+</script>
+<script>
+function checkREG_D() {
+  if (document.getElementById('confirm-regcode-promotion-D').value ==
+    document.getElementById('confirm-confirm-regcode-promotion-D').value) {
+    document.getElementById('promo-message-D').style.color = 'green';
+    document.getElementById('promo-message-D').innerHTML = 'Notice: REGCODE Matching...';
+    document.getElementById('submit-promo-disable').disabled = false;
+  } else {
+    document.getElementById('promo-message-D').style.color = 'red';
+    document.getElementById('promo-message-D').innerHTML = 'Warning: REGCODE Not Match!';
+    document.getElementById('submit-promo-disable').disabled = true;
+  }
+}
+</script>
+<script>
+function checkREG_T() {
+  if (document.getElementById('confirm-regcode-tour').value ==
+    document.getElementById('confirm-confirm-regcode-tour').value) {
+    document.getElementById('tour-message').style.color = 'green';
+    document.getElementById('tour-message').innerHTML = 'Notice: REGCODE Matching...';
+    document.getElementById('submit-tour').disabled = false;
+    document.getElementById('submit-tour-edit').disabled = false;
+  } else {
+    document.getElementById('tour-message').style.color = 'red';
+    document.getElementById('tour-message').innerHTML = 'Warning: REGCODE Not Match!';
+    document.getElementById('submit-tour').disabled = true;
+    document.getElementById('submit-tour-edit').disabled = true;
+  }
+}
+</script>
+<script>
+function checkREG_N() {
+  if (document.getElementById('confirm-regcode-news').value ==
+    document.getElementById('confirm-confirm-regcode-news').value) {
+    document.getElementById('news-message').style.color = 'green';
+    document.getElementById('news-message').innerHTML = 'Notice: REGCODE Matching...';
+    document.getElementById('submit-news').disabled = false;
+    document.getElementById('submit-news-edit').disabled = false;
+  } else {
+    document.getElementById('news-message').style.color = 'red';
+    document.getElementById('news-message').innerHTML = 'Warning: REGCODE Not Match!';
+    document.getElementById('submit-news').disabled = true;
+    document.getElementById('submit-news-edit').disabled = true;
+  }
+}
+</script>
+<script>
+function checkREG_T_D() {
+  if (document.getElementById('confirm-regcode-T-D').value ==
+    document.getElementById('confirm-confirm-regcode-news-D').value) {
+    document.getElementById('news-message-D').style.color = 'green';
+    document.getElementById('news-message-D').innerHTML = 'Notice: REGCODE Matching...';
+    document.getElementById('submit-news-disable').disabled = false;
+  } else {
+    document.getElementById('news-message-D').style.color = 'red';
+    document.getElementById('news-message-D').innerHTML = 'Warning: REGCODE Not Match!';
+    document.getElementById('submit-news-disable').disabled = true;
+  }
+}
+</script>
+<script>
+function checkREG_NEWSD() {
+  if (document.getElementById('confirm-regcode-news-D').value ==
+    document.getElementById('confirm-confirm-regcode-news-D').value) {
+    document.getElementById('news-message-D').style.color = 'green';
+    document.getElementById('news-message-D').innerHTML = 'Notice: REGCODE Matching...';
+    document.getElementById('submit-news-disable').disabled = false;
+  } else {
+    document.getElementById('news-message-D').style.color = 'red';
+    document.getElementById('news-message-D').innerHTML = 'Warning: REGCODE Not Match!';
+    document.getElementById('submit-news-disable').disabled = true;
+  }
+}
+</script>
+<!-- Compare time to be valid -->
+<script>
+function compareTIME() {
+  var dateString = document.getElementById('promo-start-date').value;
+  var dateString_2 = document.getElementById('promo-end-date').value;
+  var startingDate = new Date(dateString);
+  var endingDate = new Date(dateString_2);
+  var today = new Date();
+  if ( (startingDate < today) || (endingDate < today) || ( (startingDate < today) && (endingDate < today) )) {
+    document.getElementById('promo-message-time-validation').style.color = 'red';
+    document.getElementById('promo-message-time-validation').innerHTML = 'Notice: Starting Date OR Ending Date BEFORE today, ENTER A RELEVANT ONE.';
+    document.getElementById('submit-promo').disabled = true;
+    document.getElementById('submit-promo-edit').disabled = true;
+  } else {
+    if (document.getElementById('promo-start-date').value >
+      document.getElementById('promo-end-date').value) {
+      document.getElementById('promo-message-time').style.color = 'red';
+      document.getElementById('promo-message-time').innerHTML = 'Notice: Starting Date is LATER than Ending Date, please correct your value.';
+      document.getElementById('submit-promo').disabled = true;
+      document.getElementById('submit-promo-edit').disabled = true;
+    } else {
+      if (document.getElementById('promo-start-date').value <
+      document.getElementById('promo-end-date').value) {
+      document.getElementById('promo-message-time').style.color = 'green';
+      document.getElementById('promo-message-time').innerHTML = 'Notice: Starting Date and Ending Date are relevant.';
+      document.getElementById('promo-message-time-validation').style.color = 'green';
+      document.getElementById('promo-message-time-validation').innerHTML = 'Notice: Starting Date and Ending Date are later than today.';
+      document.getElementById('submit-promo').disabled = false;
+      document.getElementById('submit-promo-edit').disabled = false;
+    }
+  }
+}
+}
+</script>
+<script>
+function compareTIME_TOUR() {
+  var dateString = document.getElementById('tour-start-date').value;
+  var dateString_2 = document.getElementById('tour-end-date').value;
+  var startingDate = new Date(dateString);
+  var endingDate = new Date(dateString_2);
+  var today = new Date();
+  if ( (startingDate < today) || (endingDate < today) || ( (startingDate < today) && (endingDate < today) )) {
+    document.getElementById('tour-message-time-validation').style.color = 'red';
+    document.getElementById('tour-message-time-validation').innerHTML = 'Notice: Starting Date OR Ending Date BEFORE today, ENTER A RELEVANT ONE.';
+    document.getElementById('submit-tour').disabled = true;
+    document.getElementById('submit-tour-edit').disabled = true;
+  } else {
+    if (document.getElementById('tour-start-date').value >
+      document.getElementById('tour-end-date').value) {
+      document.getElementById('tour-message-time').style.color = 'red';
+      document.getElementById('tour-message-time').innerHTML = 'Notice: Starting Date is LATER than Ending Date, please correct your value.';
+      document.getElementById('submit-tour').disabled = true;
+      document.getElementById('submit-tour-edit').disabled = true;
+    } else {
+      if (document.getElementById('tour-start-date').value <
+      document.getElementById('tour-end-date').value) {
+      document.getElementById('tour-message-time').style.color = 'green';
+      document.getElementById('tour-message-time').innerHTML = 'Notice: Starting Date and Ending Date are relevant.';
+      document.getElementById('tour-message-time-validation').style.color = 'green';
+      document.getElementById('tour-message-time-validation').innerHTML = 'Notice: Starting Date and Ending Date are later than today.';
+      document.getElementById('submit-tour').disabled = false;
+      document.getElementById('submit-tour-edit').disabled = false;
+    }
+  }
+}
+}
+</script>
+<!-- Random generate number for Promotion Code -->
+<script>
+function randomString(len, an){
+    an = an&&an.toLowerCase();
+    var str="", i=0, min=an=="a"?10:0, max=an=="n"?10:62;
+    for(;i++<len;){
+      var r = Math.random()*(max-min)+min <<0;
+      str += String.fromCharCode(r+=r>9?r<36?55:61:48);
+    }
+    return str;
+}
+
+function generateCode() {
+  document.getElementById('random-code').value = randomString(16);
+}
+</script>
+				</section>
+        	</div>
+            <div class="user">
+            	<link rel="stylesheet" type="text/css" href="../SDP_SAMPLE/vendor/table-fixed-header/css/util.css">
+            	<link rel="stylesheet" type="text/css" href="../SDP_SAMPLE/vendor/table-fixed-header/vendor/perfect-scrollbar/perfect-scrollbar.css">
+            	<link rel="stylesheet" type="text/css" href="../SDP_SAMPLE/vendor/table-fixed-header/vendor/animate/animate.css">
+            	<link rel="stylesheet" type="text/css" href="../SDP_SAMPLE/vendor/table-fixed-header/vendor/select2/select2.min.css">
+              <section id="refresh" title="Click to reload"><i class="fas fa-sync-alt refresh-icon" onclick="refresh_user()"></i> REFRESH</section>
+              <section id="user-section">
+              <?php
+                include_once('10_User_Section.php');
+              ?>
+              </section>
+            </div>
+
+            <div class="tour">
+              <section id="refresh" title="Click to reload"><i class="fas fa-sync-alt refresh-icon" onclick="refreshTOUR()"></i> REFRESH</section>
+                <section id="tour-section-pointer">
+              <?php
+                include_once('10_Tour_Section.php');
+              ?>
+                </section>
+            </div>
+            <div class="booking">
+
+            </div>
+            <div class="news">
+              <section id="refresh" title="Click to reload"><i class="fas fa-sync-alt refresh-icon" onclick="refresh_NEWS()"></i> REFRESH</section>
+              <section id="news-section-pointer">
+              <?php
+                include_once('10_News_Section.php');
+              ?>
+              </section>
+            </div>
+            <div class="promotion">
+              <section id="refresh" title="Click to reload"><i class="fas fa-sync-alt refresh-icon" onclick="refresh_PROMO()"></i> REFRESH</section>
+                <section id="promotion-section-pointer">
+              <?php
+                include_once('10_Promotion_Section.php');
+              ?>
+              </section>
+            </div>
+            <!--<div class="user-feedback">
+
+            </div>-->
+			<?php
+				if ($_SESSION['role']==="2") {
+					echo '<div class="regcode">';
+            echo '<section id="reg-section-pointer">';
+            include_once('10_REGCODE_Section.php');
+            echo '</section>';
+					echo "</div>";
+				}
+      ?>
+    </div>
+        </div>
+	</div>
+	<div class="special-item">
+	<ul>
+		<li>
+			<a href="homepage.html" class="special hidden"><i class="fas fa-user-secret view-icon"></i>View as User</a>
+        </li>
+	</ul>
+	</div>
+	
+<!-- Open the specific Tabs script -->
+<script type="text/javascript">
+        $(document).ready(function() {
+            var widget = $('.tab');
+            var tabs = widget.find('ul a'),
+                content = widget.find('.content > div');
+            tabs.on('click', function (e) {
+                e.preventDefault();
+                // Get the data-index attribute, and show the matching content div
+                var index = $(this).data('index');
+
+                tabs.removeClass('tab-active');
+                content.removeClass('content-active');
+                $(this).addClass('tab-active');
+                content.eq(index).addClass('content-active');
+            });
+
+        });
+</script>
+<!-- Search Script for Dashboard-->
+<script>
+	// Get input element
+	let filterInput = document.getElementById('selUser');
+	// Add event listener
+	filterInput.addEventListener('keyup', filterNames);
+
+	function filterNames(){
+		//Get value of input
+		let filterValue = document.getElementById('selUser').value.toUpperCase();
+
+		// Get Values //
+		let section = document.getElementById('news-section');
+		// Get span from section //
+		let tr = section.querySelectorAll('section.pointer');
+		// tr is actually section tag, but lazy change so yeah //
+		// Loop through coolection items trs //
+		for(let i = 0;i < tr.length;i++){
+			let a = tr[i].getElementsByTagName('a')[0];
+			// if matched
+			if(a.innerHTML.toUpperCase().indexOf(filterValue) > -1){
+				tr[i].style.display = '';
+			}else{
+				tr[i].style.display = 'none';
+			}
+		}
+	}
+</script>
+	<footer class="center bg-dark">
+		<p>Meal-Debit System Corporation &copy; 2019</p>
+   		<p>Warning: Any violation upon <a class="tac">Terms and Conditions</a> will face legal actions.</p>
+	</footer>
+
+
+
+</body>
+</html>

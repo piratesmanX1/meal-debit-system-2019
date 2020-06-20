@@ -1,0 +1,487 @@
+﻿<!doctype html>
+<html class="no-js" lang="zxx">
+<?php
+// we will only start the session with session_start() IF the session isn't started yet //
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
+<?php
+// including the conn.php to establish connection with database //
+  include "conn.php";
+?>
+
+<?php
+	if (empty($_SESSION['user_id'])) {
+		echo "<script>alert('Unauthorized user is not allowed to enter this page. Please sign in with a legitimate account.');";
+		echo "window.location.href='logout.php';</script>";
+	}
+?>
+
+<?php
+	if ((($_SESSION['status']) != 1) || empty($_SESSION['status'])) {
+		echo "<script>alert('You are not allowed to enter this site, ".$_SESSION['role']." ".$_SESSION['last_name'].". You will be logged out by the system.');";
+		echo "window.location.href='logout.php';</script>";
+	}
+?>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title -->
+    <title> Cashier Panel | Meal-Debit System </title>
+    <link rel="icon" href="image/logo_symbol.png" type="image/ico" />
+    <link rel="stylesheet" href="vendor/product_page_pinegrow/css/foundation.css"/>
+    <!-- Confirm Transaction Style and Scripts -->
+    <link rel="stylesheet" href="vendor/responsive-table-less-shopping-cart/css/style.css">
+    <!-- Cart Carousel Style and Scripts-->
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/product_list/carousel_product_cart_slider.css" rel="stylesheet">
+    <!-- Popup Cart List Style -->
+    <link rel="stylesheet" href="vendor/freebie-2-beautiful-checkout-forms/shopping-cart/shopping-cart.css">
+    <!-- Vendor -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <!-- Plugin-CSS -->
+    <link rel="stylesheet" href="vendor/appy/appy/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/appy/appy/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="vendor/appy/appy/css/linearicons.css">
+    <link rel="stylesheet" href="vendor/appy/appy/css/magnific-popup.css">
+    <link rel="stylesheet" href="vendor/appy/appy/css/animate.css">
+    <!-- Main-Stylesheets -->
+    <link rel="stylesheet" href="vendor/appy/appy/css/normalize.css">
+    <link rel="stylesheet" href="vendor/appy/appy/style.css">
+    <link rel="stylesheet" href="vendor/appy/appy/css/responsive.css">
+    <script src="vendor/appy/appy/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="css/custom_scrollbar.css">
+    <link rel="stylesheet" href="css/dropdown_menu.css">
+    <link rel="stylesheet" href="css/cart_popup.css">
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body data-spy="scroll" data-target=".mainmenu-area">
+    <!-- Preloader-content -->
+    <div class="preloader">
+        <span><i class="lnr lnr-sun"></i></span>
+    </div>
+    <!-- MainMenu-Area -->
+    <div id="page-content">
+      <!-- Include the default page -->
+      <?php
+        include_once('cashier_panel_main.php');
+      ?>
+    </div>
+    <script>
+    function closeModal() {
+      // Get the modal
+      var modal = document.getElementById('id01');
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
+      }
+    }
+    function reload_js(src) {
+        $('script[src="' + src + '"]').remove();
+        $('<script>').attr('src', src).appendTo('head');
+    }
+    // Making the DIV in the meal list with the highest height //
+    function resizeMeal() {
+      $('.row').each(function(){
+        boxes = $(this).find('.meal-name');
+        maxHeight = Math.max.apply(
+        Math, boxes.map(function() {
+          return $(this).height();
+        }).get());
+        boxes.height(maxHeight);
+      });
+    }
+    // Making the DIV in the Confirm Transaction page with the highest width //
+    function resizeWidthTrans() {
+      $('.cart').each(function(){
+        boxes = $(this).find('.meal_details_section');
+        maxWidth = Math.max.apply(
+        Math, boxes.map(function() {
+          return $(this).width();
+        }).get());
+        boxes.width(maxWidth);
+      });
+    }
+    window.onload = closeModal;
+    window.setInterval(function(){
+      /// call your function here
+        closeModal();
+        resizeMeal();
+        resizeWidthTrans();
+    }, 100);
+    window.setInterval(function(){
+      /// call your function here
+      reload_js('vendor/appy/appy/js/vendor/jquery-ui.js');
+      reload_js('vendor/appy/appy/js/owl.carousel.min.js');
+      reload_js('vendor/appy/appy/js/contact-form.js');
+      reload_js('vendor/appy/appy/js/ajaxchimp.js');
+    //  reload_js('vendor/appy/appy/js/scrollUp.min.js'); //
+      reload_js('vendor/appy/appy/js/wow.min.js');
+      reload_js('vendor/appy/appy/js/magnific-popup.min.js');
+    //  reload_js('vendor/appy/appy/js/main.js'); //
+      reload_js('http://code.jquery.com/jquery-1.11.1.min.js');
+      reload_js('http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js');
+      reload_js('https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js');
+    }, 1000);
+    </script>
+    <!-- Changing content into Brand-List in Cashier Panel -->
+    <script type="text/javascript">
+  	function branList(number) {
+  		xmlhttp=new XMLHttpRequest();
+  		// then put into it to refresh it //
+  		xmlhttp.open("GET", "cashier_panel_main.php",false);
+  		xmlhttp.send(null);
+  		document.getElementById('page-content').innerHTML=xmlhttp.responseText;
+  	}
+  	</script>
+    <!-- Changing content of Brand-List in Cashier Panel -->
+    <script type="text/javascript">
+  	function branTable(number) {
+  	// take the value of the link clicked //
+  		var page_count = number.getAttribute('value');
+  		xmlhttp=new XMLHttpRequest();
+  		// then put into it to refresh it //
+  		xmlhttp.open("GET", "cashier_panel_main.php?page=" + page_count ,false);
+  		xmlhttp.send(null);
+  		document.getElementById('page-content').innerHTML=xmlhttp.responseText;
+  	}
+  	</script>
+    <!-- Changing content to Meal List in Cashier Panel -->
+    <script type="text/javascript">
+    function mealList(number) {
+    // take the value of the link clicked //
+      var branid = number.getAttribute('value');
+      xmlhttp=new XMLHttpRequest();
+      // then put into it to refresh it //
+      xmlhttp.open("GET", "cashier_panel_meal-list.php?brandid=" + branid ,false);
+      xmlhttp.send(null);
+      document.getElementById('page-content').innerHTML=xmlhttp.responseText;
+    }
+    </script>
+    <!-- Changing content back to Meal List in Cashier Panel from Meal Content page-->
+    <script type="text/javascript">
+    function mealBack(number) {
+    // take the value of the link clicked //
+      var meal_id = number.getAttribute('value');
+      xmlhttp=new XMLHttpRequest();
+      // then put into it to refresh it //
+      xmlhttp.open("GET", "cashier_panel_meal-list.php?brandid=" + meal_id,false);
+      xmlhttp.send(null);
+      document.getElementById('page-content').innerHTML=xmlhttp.responseText;
+    }
+    </script>
+    <!-- Update the content of the Cart List everytime it's clicked -->
+    <script type="text/javascript">
+    function cartList(number) {
+      xmlhttp=new XMLHttpRequest();
+      // then put into it to refresh it //
+      xmlhttp.open("GET", "pop-up-cart.php",false);
+      xmlhttp.send(null);
+      document.getElementById('cart-list').innerHTML=xmlhttp.responseText;
+    }
+    </script>
+    <!-- Open the Meal Content page based on the Meal ID -->
+    <script type="text/javascript">
+  	function mealContent(number) {
+      var meal_id = number.getAttribute('value');
+  		xmlhttp=new XMLHttpRequest();
+  		// then put into it to refresh it //
+  		xmlhttp.open("POST", 'meal_content.php?mealid=' + meal_id, false);
+  		xmlhttp.send(null);
+  		document.getElementById('page-content').innerHTML=xmlhttp.responseText;
+  	}
+  	</script>
+    <!-- Open the Confirm Transaction page -->
+    <script type="text/javascript">
+  	function confirmTrans(number) {
+  		xmlhttp=new XMLHttpRequest();
+  		// then put into it to refresh it //
+  		xmlhttp.open("POST", 'cashier_panel_comfirm_transaction.php', false);
+  		xmlhttp.send(null);
+  		document.getElementById('page-content').innerHTML=xmlhttp.responseText;
+  	}
+  	</script>
+    <!-- Add to Cart Functions in Ajax Script -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        function fetch_data()
+        {
+            $.ajax({
+                url:"show_cart.php",
+                method:"POST",
+                success:function(data){
+    				$('#cart-list').html(data);
+                }
+            });
+        }
+        fetch_data();
+        $(document).on('click', '#add_cart_content', function(){
+            var meal_quantity = document.getElementById("meal-quantity-content").value;
+
+            if(meal_quantity == '')
+            {
+                alert("Notice: Meal Quantity must at least more than 1 value.");
+                return false;
+            }
+            $.ajax({
+                url:"add_cart_content.php",
+                method:"POST",
+                data:{meal_quantity:meal_quantity},
+                dataType:"text",
+                success:function(data)
+                {
+                    alert(data);
+                    fetch_data();
+                }
+            })
+        });
+        $(document).on('click', '.delete_cart', function(){
+            var id=$(this).data("id1");
+            if(confirm("Are you sure you want to remove this Meal from your cart list?"))
+            {
+                $.ajax({
+                    url:"delete_cart_list.php",
+                    method:"POST",
+                    data:{meal_id:id},
+                    dataType:"text",
+                    success:function(data){
+                        alert(data);
+                        fetch_data();
+                    }
+                });
+            }
+        });
+        function edit_data(id, text, column_name) {
+          $.ajax({
+              url:"edit_cart_list.php",
+              method:"POST",
+              data:{id:id, text:text, column_name:column_name},
+              dataType:"text",
+              success:function(data){
+              alert(data);
+              }
+          });
+        }
+        $(document).on('blur', '.meal_quantity_list', function(){
+            var id = $(this).data("id2");
+            var meal_quantity_cart = $(this).val();
+            edit_data(id, meal_quantity_cart, "meal_quantity_cart");
+            fetch_data();
+        });
+
+        function branList(number) {
+      		xmlhttp=new XMLHttpRequest();
+      		// then put into it to refresh it //
+      		xmlhttp.open("GET", "cashier_panel_main.php",false);
+      		xmlhttp.send(null);
+      		document.getElementById('page-content').innerHTML=xmlhttp.responseText;
+      	}
+
+        $(document).on('click', '.delete_order', function(){
+            if(confirm("Are you sure you want to cancel the entire order, which resulting the complete removal of your cart list?"))
+            {
+                $.ajax({
+                    url:"cancel_cart_order.php",
+                    method:"POST",
+                    dataType:"text",
+                    success:function(data){
+                        alert(data);
+                        fetch_data();
+                        branList();
+                    }
+                });
+            }
+        });
+    });
+    </script>
+    <!-- Script of Meal List in Cashier Panel so cashier can just one click add to cart -->
+    <script type="text/javascript">
+    function fetch_data()
+    {
+        $.ajax({
+            url:"show_cart.php",
+            method:"POST",
+            success:function(data){
+        $('#cart-list').html(data);
+            }
+        });
+    }
+    function mealcartList(number) {
+      var meal_id = number.getAttribute('value');
+
+      if(meal_id == '')
+      {
+          alert("Notice: Meal ID undefined, something must gone wrong. Please reload the page.");
+          return false;
+      }
+      $.ajax({
+          url:"add_cart_list.php",
+          method:"POST",
+          data:{meal_id:meal_id},
+          dataType:"text",
+          success:function(data)
+          {
+              alert(data);
+              fetch_data();
+          }
+      })
+    }
+    </script>
+    <!-- Confirm Transaction page AJAX to edit the cart info in database -->
+    <script>
+    $(document).ready(function(){
+        function fetch_data_conf()
+        {
+            $.ajax({
+                url:"cashier_panel_comfirm_transaction.php",
+                method:"POST",
+                success:function(data){
+    				$('#page-content').html(data);
+                }
+            });
+        }
+        $(document).on('click', '.delete_cart_conf', function(){
+            var id=$(this).data("id2");
+            if(confirm("Are you sure you want to remove this Meal from your cart list?"))
+            {
+                $.ajax({
+                    url:"delete_cart_list.php",
+                    method:"POST",
+                    data:{meal_id:id},
+                    dataType:"text",
+                    success:function(data){
+                        alert(data);
+                        fetch_data_conf();
+                    }
+                });
+            }
+        });
+        function edit_data(id, text, column_name) {
+          $.ajax({
+              url:"edit_cart_list.php",
+              method:"POST",
+              data:{id:id, text:text, column_name:column_name},
+              dataType:"text",
+              success:function(data){
+              alert(data);
+              }
+          });
+        }
+        $(document).on('blur', '.meal_quantity_list_conf', function(){
+            var id = $(this).data("id1");
+            var meal_quantity_cart = $(this).val();
+            edit_data(id, meal_quantity_cart, "meal_quantity_cart");
+            fetch_data_conf();
+        });
+    });
+    </script>
+
+    <!-- Confirm Transaction page AJAX to check student's balance whether its eligible or not -->
+    <script>
+    $(document).ready(function(){
+      function fetch_data_bal()
+      {
+          $.ajax({
+              url:"cashier_panel_comfirm_transaction.php",
+              method:"POST",
+              success:function(data){
+          $('#page-content').html(data);
+              }
+          });
+      }
+      $(document).on('click', '.check_balance', function(){
+        var account_id = document.getElementById("stud_mail").value;
+
+        if(account_id == '')
+        {
+            alert("Notice: ID undefined, please type in the ID in order to process the purchase or check the balance.");
+            return false;
+        }
+        $.ajax({
+            url:"check_stud_bal.php",
+            method:"POST",
+            data:{account_id:account_id},
+            dataType:"text",
+            success:function(data)
+            {
+                alert(data);
+                fetch_data_bal();
+            }
+        })
+      });
+    });
+    </script>
+
+    <!-- Confirm Transaction page AJAX to update the student's balance and the order_id in database -->
+    <script>
+    $(document).ready(function(){
+        function fetch_data()
+        {
+            $.ajax({
+                url:"show_cart.php",
+                method:"POST",
+                success:function(data){
+            $('#cart-list').html(data);
+                }
+            });
+        }
+        $(document).on('click', '.checkout_trans', function(){
+            if(confirm("Are you sure you want confirm the transaction? It\'ll be irreversible once you confirmed it."))
+            {
+              var account_id = document.getElementById("stud_mail").value;
+
+              if(account_id == '')
+              {
+                  alert("Notice: ID undefined, please type in the ID in order to process the purchase or check the balance.");
+                  return false;
+              }
+                $.ajax({
+                    url:"cashier_confirm_transaction.php",
+                    method:"POST",
+                    data:{account_id:account_id},
+                    dataType:"text",
+                    success:function(data){
+                        alert(data);
+                        fetch_data();
+                        branList();
+                    }
+                });
+            }
+        });
+    });
+    </script>
+    <!--Vendor-JS-->
+    <script src="vendor/appy/appy/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="vendor/appy/appy/js/vendor/jquery-ui.js"></script>
+    <script src="vendor/appy/appy/js/vendor/bootstrap.min.js"></script>
+    <!--Plugin-JS-->
+    <script src="vendor/appy/appy/js/owl.carousel.min.js"></script>
+    <script src="vendor/appy/appy/js/contact-form.js"></script>
+    <script src="vendor/appy/appy/js/ajaxchimp.js"></script>
+    <script src="vendor/appy/appy/js/scrollUp.min.js"></script>
+    <script src="vendor/appy/appy/js/magnific-popup.min.js"></script>
+    <script src="vendor/appy/appy/js/wow.min.js"></script>
+    <!--Main-active-JS-->
+    <script src="vendor/appy/appy/js/main.js"></script>
+</body>
+
+</html>

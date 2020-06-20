@@ -1,0 +1,500 @@
+/* Background slider */
+@font-face {
+    font-family: 'Bebas-Neue';
+    src: url('BebasNeue.woff') format('woff'),; /* Pretty Modern Browsers */
+}
+
+.logo {
+    position: absolute;
+    z-index: 900;
+    top: 40%;
+    left: 2%;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.slide-1,
+.slide-2,
+.slide-3 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-attachment: fixed;
+}
+
+.slider .line {
+    position: absolute;
+    width: 98%;
+    height: auto;
+    bottom: 45%;
+    margin: 10px;
+    z-index: 999;
+}
+
+.slider .slider-caption {
+    font-family: Oswald;
+    height: 0%;
+    bottom: 35%;
+    left: 16px;
+    text-transform: uppercase;
+    font-size: 60px;
+    min-height: 80px;
+    position: absolute;
+    font-weight: bold;
+    z-index: 999;
+}
+
+.slider .slider-description {
+    font-family: Oswald;
+    bottom: 30%;
+    left: 16px;
+    font-size: 12px;
+    height: 0%;
+    position: absolute;
+    z-index: 999;
+}
+
+.slide-1 {
+    background-image: url('../image/s1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: fade-1 12s infinite;
+    -webkit-animation: fade-1 12s infinite;
+}
+
+.slide-2 {
+    background-image: url('../image/s2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: fade-2 12s infinite;
+    -webkit-animation: fade-2 12s infinite;
+}
+
+.slide-3 {
+    background-image: url('../image/s3.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: fade-3 12s infinite;
+    -webkit-animation: fade-3 12s infinite;
+}
+
+@-webkit-keyframes fade-1 {
+    0% {
+        opacity: 1;
+    }
+
+    25% {
+        opacity: 0;
+    }
+
+    75% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-1 {
+    0% {
+        opacity: 1;
+    }
+
+    25% {
+        opacity: 0;
+    }
+
+    75% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fade-2 {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    75% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fade-2 {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    75% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes fade-3 {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fade-3 {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.transparency { /*Opacity 50*/
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: url('../image/transparent.png');
+    top: 0;
+    bottom: 0;
+    z-index: -1000;
+    overflow: hidden;
+}
+
+/* Sticky Nav Bar Settings */
+.nav-bar {
+    overflow: hidden;
+    background-color: rgb(0, 0, 0, 0.7);
+    z-index: 1000;
+    position: relative;
+    font-size: 18px;
+    font-family: Oswald;
+}
+
+.nav-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-bar li {
+    display: inline-block;
+    float: left;
+    margin-right: 1px;
+}
+
+.nav-bar li a {
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    color: white;
+}
+
+.region-to-travel:hover {
+    color: red;
+    transition: .8s;
+}
+
+.page-content {
+    padding: 16px;
+    z-index: 999;
+    bottom: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.fixed {
+    width: 100%;
+    position: fixed;
+    display: block;
+    top: 7%;
+    left: 0;
+    z-index: 1000;
+    overflow: hidden;
+    background-color: rgb(0, 0, 0, 0.7);
+}
+
+.background-image {
+    width: 100%;
+    height: 94%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Contents */
+/* About */
+.about {
+    background-color: white;
+    color: black;
+    font-family: Oswald;
+}
+
+.about h4 {
+    font-size: 46px;
+    padding: 20px 10px;
+}
+
+.about p {
+    font-size: 23px;
+    padding: 0 10px;
+}
+
+.about-founders {
+    text-align: center;
+    background: white;
+    padding: 60px;
+    overflow: hidden;
+}
+
+.about-founders h1 {
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    color: black;
+    font-size: 40px;
+}
+
+.founders-border {
+    display: block;
+    margin: auto;
+    width: 160px;
+    height: 3px;
+    background: #3498db;
+    margin-bottom: 40px;
+}
+
+.founders-picture {
+    margin-bottom: 40px;
+}
+
+.founders-picture a {
+    display: inline-block;
+    margin: 0 30px;
+    width: 160px;
+    height: 160px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.founders-picture a img {
+    width: 100%;
+    filter: grayscale(100%);
+    transition: 0.4s all;
+}
+
+.founders-picture a:hover > img {
+    filter: none;
+}
+
+.founders-section {
+    width: 600px;
+    margin: auto;
+    font-size: 20px;
+    color: black;
+    text-align: justify;
+    height: 0;
+    overflow: hidden;
+}
+
+.founders-section:target {
+    height: auto;
+}
+
+.name {
+    display: block;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 22px;
+}
+
+/* Services */
+.services {
+    background-color: black;
+    color: white;
+    font-family: Oswald;
+    text-align: center;
+}
+
+.services h4 {
+    font-size: 46px;
+    padding: 20px 10px;
+}
+
+.services h1 {
+    display: inline-block;
+    text-transform: uppercase;
+    border-bottom: 4px solid #3498db;
+    font-size: 20px;
+    padding-bottom: 10px;
+    margin-top: 40px;
+}
+
+.services-cen {
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.service {
+    display: inline-block;
+    width: calc(100% /3);
+    margin: 0 -2px;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: 0.4s;
+}
+
+/* Stopped Using it due to contradiction of borders
+.service:hover {
+	background: #ddd;
+	color: black;
+}
+*/
+.service i {
+    color: #3498db;
+    font-size: 34px;
+    margin-bottom: 30px;
+}
+
+.service h2 {
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 0;
+}
+
+service p {
+    color: gray;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+@media screen and (max-width:800px) {
+    .service {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .service {
+        width: 100%;
+    }
+}
+
+/* About Founders Descriptions */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic);
+
+blockquote {
+    font-size: 1.4em;
+    width: 100%;
+    margin: 50px auto;
+    font-family: Open Sans;
+    font-style: italic;
+    color: #555555;
+    padding: 1.2em 30px 1.2em 75px;
+    border-left: 8px solid #78C0A8 ;
+    line-height: 1.6;
+    position: relative;
+    background: #EDEDED;
+}
+
+blockquote::before {
+    font-family: Arial;
+    content: "\201C";
+    color: #78C0A8;
+    font-size: 4em;
+    position: absolute;
+    left: 10px;
+    top: -10px;
+}
+
+blockquote::after {
+    content: '';
+}
+
+blockquote span {
+    display: block;
+    color: #333333;
+    font-style: normal;
+    font-weight: bold;
+    margin-top: 1em;
+}
+
+/* Parallax Effect */
+.parallax-image-1 {
+    height: 100vh;
+    width: 100%;
+    background-image: url('../image/s4.jpg');
+    background-size: cover;
+    background-position: center;
+    display: table;
+    background-attachment: fixed;
+}
+
+.parallax-effect h2 {
+    font-size: 48px;
+    color: white;
+    margin: 0px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    font-family: Oswald;
+}
+
+.parallax-effect .transparency {
+    background-position: center;
+    display: table;
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+}
+
+.parallax-image-contact {
+    height: 100vh;
+    width: 100%;
+    background-image: url('../image/image_contact.jpg');
+    background-size: cover;
+    background-position: center;
+    display: table;
+    background-attachment: fixed;
+}

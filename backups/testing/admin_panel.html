@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<?php
+// we will only start the session with session_start() IF the session isn't started yet //
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
+<?php
+// including the conn.php to establish connection with database //
+  include "conn.php";
+?>
+
+<?php
+	if (($_SESSION['status']) < 1) {
+		echo "<script>alert('You are not allowed to enter this site, ".$_SESSION['role']." ".$_SESSION['last_name'].". You will be logged out by the system.');";
+		echo "window.location.href='logout.php';</script>";
+	}
+?>
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="image/logo_symbol.png" type="image/ico" />
+
+    <title> Admin Panel | Meal-Debit System </title>
+	<!-- Admin Panel's CSS -->
+    <link href="css/admin_panel.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/loading....css" type="text/css">
+
+	<!-- Vendors -->
+    <!-- Bootstrap -->
+    <link href="vendor/gentelella-master/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="vendor/gentelella-master/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="vendor/gentelella-master/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="vendor/gentelella-master/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="vendor/gentelella-master/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="vendor/gentelella-master/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link href="vendor/gentelella-master/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="vendor/gentelella-master/build/css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Oswald|Open+Sans:400,600' rel='stylesheet' type='text/css'>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	 <!-- Loading Script -->
+	 <script type="text/javascript">
+	 	$(window).on('load',function(){
+	 		$('.preloader').addClass('complete')
+	 		})
+	 </script>
+  </head>
+
+  <body class="nav-md content">
+  	<!-- Loading the Page OP -->
+	<div class="preloader">
+		<div class="loader">
+		</div>
+	</div>
+	<!-- Loading the Page ED -->
+	
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col transition">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="homepage.html" class="site_title"><img class="logo-img" src="image/logo_symbol.png"/><span style="font-family:Oswald; padding-left: 10px;">Meal-Debit System</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="
+                <?php
+                  echo $_SESSION['profile_image'];
+                ?>
+                " alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Welcome, Admin</span>
+                <h2>
+                <?php
+                  echo $_SESSION['first_name']." ".$_SESSION['last_name'];
+                ?>
+                </h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu tab">
+              <div class="menu_section">
+                <h3>Management</h3>
+                <ul class="nav side-menu">
+	              <li class="tablink active" onclick="openPage('dashboard', this); refresh(); css_dashboard();" id="defaultOpen" data-r="0"><a onclick="return false"><i class="fa fa-desktop"></i> Dashboard <input id="r0" class="radio-page" checked="checked" name=page value="dashboard" type=radio></a></li>
+                  <li><a><i class="fa fa-user-circle"></i> User <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li class="tablink" onclick="openPage('cashier-user-list', this); refresh();" data-r="1"><a onclick="return false"> Cashier <input id="r1" class="radio-page" name=page value="cashier-user-list" type=radio></a></li>
+                      <li class="tablink" onclick="openPage('student-user-list', this); refresh();" data-r="2"><a onclick="return false"> Student <input id="r2" class="radio-page" name=page value="student-user-list" type=radio></a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-edit"></i> Registration <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li class="tablink" onclick="openPage('registration-list', this); refresh();" data-r="3"><a onclick="return false"> User List <input id="r3" class="radio-page" name=page value="registration-list" type=radio><span class="label label-success pull-right">6</span></a></li>
+                      <li class="tablink" onclick="openPage('vercode-list', this); refresh();" data-r-id="4"><a onclick="return false"> Verification Code <input id="r4" class="radio-page" name=page value="vercode-list" type=radio></a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-shopping-cart"></i> Meal <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li class="tablink" onclick="openPage('brand-list', this); refresh();" data-r-id="5"><a onclick="return false"> Brand <input id="r5" class="radio-page" name=page value="brand-list" type=radio></a></li>
+                      <li class="tablink" onclick="openPage('meal-list', this); refresh();" data-r-id="6"><a onclick="return false"> Meal List <input id="r6" class="radio-page" name=page value="meal-list" type=radio></a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-bar-chart-o"></i> Monthly Reports <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li class="tablink" onclick="openPage('report-list', this); refresh();" data-r-id="7"><a onclick="return false"> Sale Reports <input id="r7" class="radio-page" name=page value="report-list" type=radio></a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>Others</h3>
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-bug"></i> Functioning Pages <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="homepage.html">Homepage</a></li>
+                      <li><a href="registration.html">Registration</a></li>
+                      <li><a href="login.html">Sign In</a></li>
+                      <li><a href="profile_page.html">Profile Page</a></li>
+                      <li><a href="forget_password.html">Forget Password</a></li>
+                      <li><a href="cashier_page.html">Cashier Page</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-sitemap"></i> Admin List <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a>Status<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            <li class="tablink" onclick="openPage('active-admin-list', this); refresh();" data-r-id="8"><a onclick="return false"> Active <input id="r8" class="radio-page" name=page value="active-admin-list" type=radio></a>
+                            </li>
+                            <li class="tablink" onclick="openPage('inactive-admin-list', this); refresh();" data-r-id="9"><a onclick="return false"> Inactive <input id="r9" name=page class="radio-page" value="inactive-admin-list" type=radio></a>
+                            </li>
+                          </ul>
+                        </li>
+                    </ul>
+                  </li>
+                  <li><a href="javascript:void(0)" onclick="return false"><i class="fa fa-laptop"></i> Feedback <span class="label label-success pull-right">Coming Soon</span></a></li>
+                </ul>
+              </div>
+
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Refresh (PHP)" onclick="refresh()">
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true" onclick="openFullscreen()"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="View as User" href="homepage.html">
+                <span class="fas fa-user-secret" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="logout.php">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+		<!-- Full Screen javascript -->
+		<script>
+		/* Get the documentElement (<html>) to display the page in fullscreen */
+		var elem = document.documentElement;
+
+		/* View in fullscreen */
+		function openFullscreen() {
+		  if (elem.requestFullscreen) {
+		    elem.requestFullscreen();
+		  } else if (elem.mozRequestFullScreen) { /* Firefox */
+		    elem.mozRequestFullScreen();
+		  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+		    elem.webkitRequestFullscreen();
+		  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+		    elem.msRequestFullscreen();
+		  }
+		}
+
+		/* Close fullscreen */
+		function closeFullscreen() {
+		  if (document.exitFullscreen) {
+		    document.exitFullscreen();
+		  } else if (document.mozCancelFullScreen) { /* Firefox */
+		    document.mozCancelFullScreen();
+		  } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+		    document.webkitExitFullscreen();
+		  } else if (document.msExitFullscreen) { /* IE/Edge */
+		    document.msExitFullscreen();
+		  }
+		}
+		</script>
+        <!-- top navigation -->
+        <div class="top_nav transition">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right transition">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle transition" data-toggle="dropdown" aria-expanded="false">
+                    <img src="
+                    <?php
+                      echo $_SESSION['profile_image'];
+                    ?>
+                    " alt="">
+                    <?php
+                      echo $_SESSION['first_name']." ".$_SESSION['last_name'];
+                    ?>
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="profile_page.html"> Profile</a></li>
+                    <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  </ul>
+                </li>
+
+                <li role="presentation" class="dropdown transition">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="far fa-bell"></i>
+                    <span class="badge bg-green">6</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image">
+					  <img src="vendor/gentelella-master/production/images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image">
+					  <img src="vendor/gentelella-master/production/images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image">
+					  <img src="vendor/gentelella-master/production/images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image">
+					  <img src="vendor/gentelella-master/production/images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center tablink">
+                        <a onclick="openPage('registration-list', this); refresh();">
+                          <strong>View Registration List</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content: dashboard -->
+        <div class="right_col tabcontent" id="dashboard" role="main">
+          	<?php
+              include_once('dashboard.php');
+          	?>
+        </div>
+        <!-- end of page content: dashboard -->
+
+		<!-- page content: cashier-user -->
+        <div class="right_col tabcontent" id="cashier-user-list" role="main">
+		</div>
+		<!-- end of page content: cashier-user -->
+
+		<!-- page content: student-user -->
+        <div class="right_col tabcontent" id="student-user-list" role="main">
+		</div>
+		<!-- end of page content: student-user -->
+
+		<!-- page content: registration-list -->
+        <div class="right_col tabcontent" id="registration-list" role="main">
+		</div>
+		<!-- end of page content: registration-list -->
+
+		<!-- page content: vercode -->
+        <div class="right_col tabcontent" id="vercode-list" role="main">
+		</div>
+		<!-- end of page content: vercode -->
+
+		<!-- page content: brand -->
+        <div class="right_col tabcontent" id="brand-list" role="main">
+		</div>
+		<!-- end of page content: brand -->
+
+		<!-- page content: meal -->
+        <div class="right_col tabcontent" id="meal-list" role="main">
+		</div>
+		<!-- end of page content: meal -->
+
+		<!-- page content: report -->
+        <div class="right_col tabcontent" id="report-list" role="main">
+		</div>
+		<!-- end of page content: report -->
+
+		<!-- page content: active-admin -->
+        <div class="right_col tabcontent" id="active-admin-list" role="main">
+		</div>
+		<!-- end of page content: active-admin -->
+
+		<!-- page content: inactive-admin -->
+        <div class="right_col tabcontent" id="inactive-admin-list" role="main">
+		</div>
+		<!-- end of page content: inactive-admin -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+    <!-- Open Specific Tab -->
+    <script>
+	function openPage(pageName,elmnt) {
+	  var i, tabcontent, tablinks;
+	  tabcontent = document.getElementsByClassName("tabcontent");
+	  for (i = 0; i < tabcontent.length; i++) {
+	    tabcontent[i].style.display = "none";
+	  }
+	  tablinks = document.getElementsByClassName("tablink");
+	  for (i = 0; i < tablinks.length; i++) {
+	  }
+	  document.getElementById(pageName).style.display = "block";
+	}
+
+	// Get the element with id="defaultOpen" and click on it
+	document.getElementById("defaultOpen").click();
+	</script>
+	<!-- Refresh PHP load data without reloading the page -->
+	<script type="text/javascript">
+	function refresh() {
+		xmlhttp=new XMLHttpRequest();
+		// take the value of the radio button that the user want to refresh //
+		var page = $("input[name='page']:checked").val();
+		// then put into it to refresh it //
+		xmlhttp.open("POST", page +'.php',false);
+		xmlhttp.send(null);
+		document.getElementById(page).innerHTML=xmlhttp.responseText;
+	}
+	</script>
+	<!-- if click on the li will check the related radio button (hidden)(for the purpose of refreshing the data without reloading the page) as well -->
+	<script type="application/javascript">
+		$('.tablink').click(function() {
+		 $(this).children('a').children('input').prop('checked', true);
+		});
+	</script>
+	<!-- Check the registration list radio button for the link in notification -->
+	<script type="text/javascript">
+	function check_reg() {
+		document.getElementById("r3").checked = true;
+	}
+	</script>
+	<!-- Let the Dashboard's CSS refresh when it's clicked -->
+	<script type="text/javascript">
+	function css_dashboard() {
+		$(document).ready(function() {
+		    $(".collapse-link").on("click", function() {
+		        var a = $(this).closest(".x_panel"),
+		            b = $(this).find("i"),
+		            c = a.find(".x_content");
+		        a.attr("style") ? c.slideToggle(200, function() {
+		            a.removeAttr("style");
+		        }) : (c.slideToggle(200), a.css("height", "auto")), b.toggleClass("fa-chevron-up fa-chevron-down");
+		    }), $(".close-link").click(function() {
+		        var a = $(this).closest(".x_panel");
+		        a.remove();
+		    });
+		}), $(document).ready(function() {
+		    $('[data-toggle="tooltip"]').tooltip({
+		        container: "body"
+		    });
+		}), $(".progress .progress-bar")[0] && $(".progress .progress-bar").progressbar(), $(document).ready(function() {
+		    if ($(".js-switch")[0]) {
+		        var a = Array.prototype.slice.call(document.querySelectorAll(".js-switch"));
+		        a.forEach(function(a) {
+		            new Switchery(a, {
+		                color: "#26B99A"
+		            });
+		        });
+		    }
+		}), $(document).ready(function() {
+		    $("input.flat")[0] && $(document).ready(function() {
+		        $("input.flat").iCheck({
+		            checkboxClass: "icheckbox_flat-green",
+		            radioClass: "iradio_flat-green"
+		        });
+		    });
+		});
+	}
+	</script>
+	<!-- Only open the PHP file when you click on the tab, so less processes being used -->
+		<!-- Solved, by just putting the refresh() function onclick, as we already set the radio button to every page specifically. -->
+
+	<!-- Vendors -->
+    <!-- jQuery -->
+    <script src="vendor/gentelella-master/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="vendor/gentelella-master/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="vendor/gentelella-master/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="vendor/gentelella-master/vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="vendor/gentelella-master/vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="vendor/gentelella-master/vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="vendor/gentelella-master/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="vendor/gentelella-master/vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="vendor/gentelella-master/vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="vendor/gentelella-master/vendors/Flot/jquery.flot.js"></script>
+    <script src="vendor/gentelella-master/vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="vendor/gentelella-master/vendors/Flot/jquery.flot.time.js"></script>
+    <script src="vendor/gentelella-master/vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="vendor/gentelella-master/vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="vendor/gentelella-master/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="vendor/gentelella-master/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="vendor/gentelella-master/vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="vendor/gentelella-master/vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="vendor/gentelella-master/vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="vendor/gentelella-master/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="vendor/gentelella-master/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="vendor/gentelella-master/vendors/moment/min/moment.min.js"></script>
+    <script src="vendor/gentelella-master/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="vendor/gentelella-master/build/js/custom.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,170 @@
+﻿<!doctype html>
+<html class="no-js" lang="zxx">
+<?php
+// we will only start the session with session_start() IF the session isn't started yet //
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
+<?php
+// including the conn.php to establish connection with database //
+  include "conn.php";
+?>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title -->
+    <title> Meal List (Public) | Meal-Debit System </title>
+    <link rel="icon" href="image/logo_symbol.png" type="image/ico" />
+    <link rel="stylesheet" href="vendor/product_page_pinegrow/css/foundation.css"/>
+    <!-- Confirm Transaction Style and Scripts -->
+    <link rel="stylesheet" href="vendor/responsive-table-less-shopping-cart/css/style.css">
+    <!-- Cart Carousel Style and Scripts-->
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/product_list/carousel_product_cart_slider.css" rel="stylesheet">
+    <!-- Popup Cart List Style -->
+    <link rel="stylesheet" href="vendor/freebie-2-beautiful-checkout-forms/shopping-cart/shopping-cart.css">
+    <!-- Vendor -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <!-- Plugin-CSS -->
+    <link rel="stylesheet" href="vendor/appy/appy/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/appy/appy/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="vendor/appy/appy/css/linearicons.css">
+    <link rel="stylesheet" href="vendor/appy/appy/css/magnific-popup.css">
+    <link rel="stylesheet" href="vendor/appy/appy/css/animate.css">
+    <!-- Main-Stylesheets -->
+    <link rel="stylesheet" href="vendor/appy/appy/css/normalize.css">
+    <link rel="stylesheet" href="vendor/appy/appy/style.css">
+    <link rel="stylesheet" href="vendor/appy/appy/css/responsive.css">
+    <script src="vendor/appy/appy/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="css/custom_scrollbar.css">
+    <link rel="stylesheet" href="css/dropdown_menu.css">
+    <link rel="stylesheet" href="css/cart_popup.css">
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body data-spy="scroll" data-target=".mainmenu-area">
+    <!-- Preloader-content -->
+    <div class="preloader">
+        <span><i class="lnr lnr-sun"></i></span>
+    </div>
+    <!-- MainMenu-Area -->
+    <div id="page-content">
+      <!-- Include the default page -->
+      <?php
+        include_once('public_meal_list_main.php');
+      ?>
+    </div>
+    <script>
+    function reload_js(src) {
+        $('script[src="' + src + '"]').remove();
+        $('<script>').attr('src', src).appendTo('head');
+    }
+    // Making the DIV in the meal list with the highest height //
+    function resizeMeal() {
+      $('.row').each(function(){
+        boxes = $(this).find('.meal-name');
+        maxHeight = Math.max.apply(
+        Math, boxes.map(function() {
+          return $(this).height();
+        }).get());
+        boxes.height(maxHeight);
+      });
+    }
+    // Making the DIV in the Confirm Transaction page with the highest width //
+    function resizeWidthTrans() {
+      $('.cart').each(function(){
+        boxes = $(this).find('.meal_details_section');
+        maxWidth = Math.max.apply(
+        Math, boxes.map(function() {
+          return $(this).width();
+        }).get());
+        boxes.width(maxWidth);
+      });
+    }
+    window.onload = resizeMeal;
+    window.setInterval(function(){
+      /// call your function here
+        resizeMeal();
+        resizeWidthTrans();
+    }, 100);
+    window.setInterval(function(){
+      /// call your function here
+      reload_js('vendor/appy/appy/js/vendor/jquery-ui.js');
+      reload_js('vendor/appy/appy/js/owl.carousel.min.js');
+      reload_js('vendor/appy/appy/js/contact-form.js');
+      reload_js('vendor/appy/appy/js/ajaxchimp.js');
+    //  reload_js('vendor/appy/appy/js/scrollUp.min.js'); //
+      reload_js('vendor/appy/appy/js/wow.min.js');
+      reload_js('vendor/appy/appy/js/magnific-popup.min.js');
+    //  reload_js('vendor/appy/appy/js/main.js'); //
+      reload_js('http://code.jquery.com/jquery-1.11.1.min.js');
+      reload_js('http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js');
+      reload_js('https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js');
+    }, 1000);
+    </script>
+    <!-- Changing content into Brand-List in Cashier Panel -->
+    <script type="text/javascript">
+  	function branList(number) {
+  		xmlhttp=new XMLHttpRequest();
+  		// then put into it to refresh it //
+  		xmlhttp.open("GET", "public_meal_list_main.php",false);
+  		xmlhttp.send(null);
+  		document.getElementById('page-content').innerHTML=xmlhttp.responseText;
+  	}
+  	</script>
+    <!-- Changing content of Brand-List in Cashier Panel -->
+    <script type="text/javascript">
+  	function branTable(number) {
+  	// take the value of the link clicked //
+  		var page_count = number.getAttribute('value');
+  		xmlhttp=new XMLHttpRequest();
+  		// then put into it to refresh it //
+  		xmlhttp.open("GET", "public_meal_list_main.php?page=" + page_count ,false);
+  		xmlhttp.send(null);
+  		document.getElementById('page-content').innerHTML=xmlhttp.responseText;
+  	}
+  	</script>
+    <!-- Changing content to Meal List in Cashier Panel -->
+    <script type="text/javascript">
+    function mealList(number) {
+    // take the value of the link clicked //
+      var branid = number.getAttribute('value');
+      xmlhttp=new XMLHttpRequest();
+      // then put into it to refresh it //
+      xmlhttp.open("GET", "public_meal_list_meal-list.php?brandid=" + branid ,false);
+      xmlhttp.send(null);
+      document.getElementById('page-content').innerHTML=xmlhttp.responseText;
+    }
+    </script>
+
+    <!--Vendor-JS-->
+    <script src="vendor/appy/appy/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="vendor/appy/appy/js/vendor/jquery-ui.js"></script>
+    <script src="vendor/appy/appy/js/vendor/bootstrap.min.js"></script>
+    <!--Plugin-JS-->
+    <script src="vendor/appy/appy/js/owl.carousel.min.js"></script>
+    <script src="vendor/appy/appy/js/contact-form.js"></script>
+    <script src="vendor/appy/appy/js/ajaxchimp.js"></script>
+    <script src="vendor/appy/appy/js/scrollUp.min.js"></script>
+    <script src="vendor/appy/appy/js/magnific-popup.min.js"></script>
+    <script src="vendor/appy/appy/js/wow.min.js"></script>
+    <!--Main-active-JS-->
+    <script src="vendor/appy/appy/js/main.js"></script>
+</body>
+
+</html>

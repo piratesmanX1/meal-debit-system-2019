@@ -1,0 +1,115 @@
+// Setting up
+
+$bg: #313841; $red: #F34541; $black: #1D242B; $green: #38B87C; $blue: #2492FF; body { background: $bg; color: #fff; font-family: "Roboto", sans-serif; font-size: 13px; } .centerMe { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+
+// Dribbble
+
+button {
+	display: flex;
+	cursor: pointer;
+	border: 0;
+	background: transparent;
+	outline: 0;
+	overflow: hidden;
+	.icon {
+		position: relative;
+		background: $black;
+		line-height: 30px;
+		width: 30px;
+		height: 30px;
+		text-align: center;
+		color: #fff;
+		font-size: 18px;
+		transition: .2s color;
+		border-radius: 2px;
+		.fa {
+			width: 30px;
+			transition: .2s all;
+		}
+		.fa-check { color: $green; }
+		.fa-question { color: $blue; }
+		&:after {
+			content: ' ';
+			display: block;
+			position: absolute;
+			width: 5px;
+			height: 5px;
+			transform: rotate(45deg);
+			background: $black;
+			top: 12.5px;
+			right: 1px;
+			transition: .2s right;
+			z-index: 1;
+		}
+	}
+	.text {
+		position: relative;
+		width: 0;
+		height: 30px;
+		overflow: hidden;
+		font-family: "Roboto", sans-serif;
+		background: $red;
+		text-align: center;
+		line-height: 30px;
+		color: #fff;
+		font-weight: 300;
+		transition: .2s all;
+		border-top-right-radius: 2px;
+		border-bottom-right-radius: 2px;
+		span {
+			width: 100%;
+			opacity: 0;
+			position: absolute;
+			top: -30px;
+			left: 50%;
+			transform: translateX(-50%);
+			transition: .3s all;
+		}
+	}
+	&:hover {
+		.icon {
+			color: $red;
+			border-radius: 0;
+			border-top-left-radius: 2px;
+			border-bottom-left-radius: 2px;
+			&:after { right: -2px; }
+		}
+		.text {
+			width: 120px;
+			span { opacity: 1; top: 0; }
+		}
+	}
+	&.confirm {
+		.icon {
+			border-radius: 0;
+			border-top-left-radius: 2px;
+			border-bottom-left-radius: 2px;
+			.fa { transform: translateY(-30px); }
+			&:after { right: -2px }
+		}
+		.text {
+			background: $blue;
+			width: 120px;
+			span { opacity: 1; top: 0; }
+		}
+	}
+	&.done {
+		.icon {
+			border-radius: 0;
+			border-top-left-radius: 2px;
+			border-bottom-left-radius: 2px;
+			.fa { transform: translateY(-60px); }
+			&:after { right: -2px }
+		}
+		.text {
+			background: $green;
+			width: 120px;
+			span { opacity: 1; top: 0; }
+		}
+	}
+}
+
+@keyframes fadeInZoom {
+	0% { opacity: 0; transform: scale(.7); }
+	100% { opacity: 1; transform: scale(1); }
+}

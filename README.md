@@ -4,7 +4,7 @@ A group assignment which being assigned at the last semester of Diploma, which i
 
 **The uploaded project file is only for references and comparison, the project file will not be used in any profit-oriented activities without my permission. The user that downloaded the said project will be responsible for any outcomes of their future implementation on the project, and I will not held any legal responsibilities upon your action. However, any users are welcomed to suggest any changes or improvements upon the project if they want to.**
 
-**====================================INSTRUCTIONS====================================**
+**===================================INSTRUCTIONS===================================**
 1. Import Database into phpMyAdmin. (File name: ```meal_debit_system.sql```)
 2. Go to SQL tab in phpMyAdmin and type this (before that enable event scheduler, type in SQL tab with this: ```SET GLOBAL event_scheduler="ON"; ```):
 
@@ -32,4 +32,4 @@ with the directory like this: ```www\APU\SDP\homepage.html```
 Follow the instruction in this link:
 https://stackoverflow.com/questions/11312316/how-do-i-add-php-code-file-to-html-html-files
 
-**====================================INSTRUCTIONS====================================**
+**===================================INSTRUCTIONS===================================**
